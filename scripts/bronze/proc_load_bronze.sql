@@ -19,117 +19,242 @@ BEGIN
 	DECLARE @start_time DATETIME, @end_time DATETIME, @batch_start_time DATETIME, @batch_end_time DATETIME
 	BEGIN TRY
 		SET @batch_start_time = GETDATE();
-		PRINT '=============================================================';
-		PRINT 'Loading Bronze Layer';
-		PRINT '=============================================================';
+	PRINT '=============================================================';
+	PRINT 'Loading Bronze Layer';
+	PRINT '=============================================================';
+
+	PRINT '-------------------------------------------------------------';
+	PRINT 'Loading bronze.ChannelDim';
+	PRINT '-------------------------------------------------------------';
+
+	SET @start_time = GETDATE();
+	PRINT '>>>>Truncating Table: bronze.ChannelDim';
+	TRUNCATE TABLE bronze.ChannelDim;
+
+	PRINT '>>>>Inserting Data Into: bronze.ChannelDim';
+	BULK INSERT bronze.ChannelDim
+	FROM 'C:\Users\Patrick Sanchez\Downloads\mytruckpoint\ChannelDim.csv'
+	WITH (
+
+		FIRSTROW = 2,
+		FIELDTERMINATOR = ',',
+		ROWTERMINATOR = '0x0a',
+		TABLOCK
+	);
+
+	SET @end_time = GETDATE();
+	PRINT '>>Load Duration: ' + CAST(DATEDIFF(second, @start_time, @end_time) AS NVARCHAR) + ' seconds';
+	PRINT '>> ----------------';
+
+	SET @start_time =GETDATE();
+	PRINT '>>>>Truncating Table: bronze.CustomerDim';
+	TRUNCATE TABLE bronze.CustomerDim;
+
+	PRINT '>>>>Inserting Data Into: CustomerDim';
+	BULK INSERT bronze.CustomerDim
+	FROM 'C:\Users\Patrick Sanchez\Downloads\mytruckpoint\CustomerDim.csv'
+	WITH (
+
+		FIRSTROW = 2,
+		FIELDTERMINATOR = ',',
+		ROWTERMINATOR = '0x0a',
+		TABLOCK
+	);
+
+	SET @end_time = GETDATE();
+	PRINT '>>Load Duration: ' + CAST(DATEDIFF(second, @start_time, @end_time) AS NVARCHAR) + ' seconds';
+	PRINT '>> ----------------';
+
+	SET @start_time =GETDATE();
+	PRINT '>>>>Truncating Table: bronze.EmployeeDim';
+	TRUNCATE TABLE bronze.EmployeeDim;
+
+	PRINT '>>>>Inserting Data Into: EmployeeDim';
+	BULK INSERT bronze.EmployeeDim
+	FROM 'C:\Users\Patrick Sanchez\Downloads\mytruckpoint\EmployeeDim.csv'
+	WITH (
+
+		FIRSTROW = 2,
+		FIELDTERMINATOR = ',',
+		ROWTERMINATOR = '0x0a',
+		TABLOCK
+	);
+
+	SET @end_time = GETDATE();
+	PRINT '>>Load Duration: ' + CAST(DATEDIFF(second, @start_time, @end_time) AS NVARCHAR) + ' seconds';
+	PRINT '>> ----------------';
+
+	SET @start_time =GETDATE();
+	PRINT '>>>>Truncating Table: InventoryFact';
+	TRUNCATE TABLE bronze.InventoryFact;
+
+	PRINT '>>>>Inserting Data Into: bronze.crm_cust_info';
+	BULK INSERT bronze.InventoryFact
+	FROM 'C:\Users\Patrick Sanchez\Downloads\mytruckpoint\InventoryFact.csv'
+	WITH (
+
+		FIRSTROW = 2,
+		FIELDTERMINATOR = ',',
+		ROWTERMINATOR = '0x0a',
+		TABLOCK
+	);
+
+	SET @end_time = GETDATE();
+	PRINT '>>Load Duration: ' + CAST(DATEDIFF(second, @start_time, @end_time) AS NVARCHAR) + ' seconds';
+	PRINT '>> ----------------';
+
+	SET @start_time =GETDATE();
+	PRINT '>>>>Truncating Table: LocationDim';
+	TRUNCATE TABLE bronze.LocationDim;
+
+	PRINT '>>>>Inserting Data Into: LocationDim';
+	BULK INSERT bronze.LocationDim
+	FROM 'C:\Users\Patrick Sanchez\Downloads\mytruckpoint\LocationDim.csv'
+	WITH (
+
+		FIRSTROW = 2,
+		FIELDTERMINATOR = ',',
+		ROWTERMINATOR = '0x0a',
+		TABLOCK
+	);
+
+	SET @end_time = GETDATE();
+	PRINT '>>Load Duration: ' + CAST(DATEDIFF(second, @start_time, @end_time) AS NVARCHAR) + ' seconds';
+	PRINT '>> ----------------';
+
+	SET @start_time =GETDATE();
+	PRINT '>>>>Truncating Table: bronze.MarketingFact';
+	TRUNCATE TABLE bronze.MarketingFact;
+
+	PRINT '>>>>Inserting Data Into: bronze.MarketingFact';
+	BULK INSERT bronze.MarketingFact
+	FROM 'C:\Users\Patrick Sanchez\Downloads\mytruckpoint\MarketingFact.csv'
+	WITH (
+
+		FIRSTROW = 2,
+		FIELDTERMINATOR = ',',
+		ROWTERMINATOR = '0x0a',
+		TABLOCK
+	);
+
+	SET @end_time = GETDATE();
+	PRINT '>>Load Duration: ' + CAST(DATEDIFF(second, @start_time, @end_time) AS NVARCHAR) + ' seconds';
+	PRINT '>> ----------------';
+
+	SET @start_time =GETDATE();
+	PRINT '>>>>Truncating Table: ProductDim';
+	TRUNCATE TABLE bronze.ProductDim;
+
+	PRINT '>>>>Inserting Data Into: bronze.ProductDim';
+	BULK INSERT bronze.ProductDim
+	FROM 'C:\Users\Patrick Sanchez\Downloads\mytruckpoint\ProductDim.csv'
+	WITH (
+
+		FIRSTROW = 2,
+		FIELDTERMINATOR = ',',
+		ROWTERMINATOR = '0x0a',
+		TABLOCK
+	);
+
+	SET @end_time = GETDATE();
+	PRINT '>>Load Duration: ' + CAST(DATEDIFF(second, @start_time, @end_time) AS NVARCHAR) + ' seconds';
+	PRINT '>> ----------------';
 
 
-		PRINT '-------------------------------------------------------------';
-		PRINT 'Loading CRM Tables';
-		PRINT '-------------------------------------------------------------';
+	SET @start_time =GETDATE();
+	PRINT '>>>>Truncating Table: bronze.ReturnsFact';
+	TRUNCATE TABLE bronze.ReturnsFact;
 
-		SET @start_time =GETDATE();
-		PRINT '>>>>Truncating Table: bronze.crm_cust_info';
-		TRUNCATE TABLE bronze.crm_cust_info;
+	PRINT '>>>>Inserting Data Into: bronze.ReturnsFact';
+	BULK INSERT bronze.ReturnsFact
+	FROM 'C:\Users\Patrick Sanchez\Downloads\mytruckpoint\ReturnsFact.csv'
+	WITH (
 
-		PRINT '>>>>Inserting Data Into: bronze.crm_cust_info';
-		BULK INSERT bronze.crm_cust_info
-		FROM 'C:\Users\Patrick Sanchez\Downloads\E-commerce project\crm_cust_info.csv'
-		WITH (
-			FIRSTROW = 2,
-			FIELDTERMINATOR = ',',
-			TABLOCK
-		);
-		SET @end_time = GETDATE();
-		PRINT '>>Load Duration: ' + CAST(DATEDIFF(second, @start_time, @end_time) AS NVARCHAR) + ' seconds';
-		PRINT '>> ----------------';
+		FIRSTROW = 2,
+		FIELDTERMINATOR = ',',
+		ROWTERMINATOR = '0x0a',
+		TABLOCK
+	);
 
-		SET @start_time = GETDATE();
-		PRINT '>>>>Truncating Table: bronze.crm_prd_info';
-		TRUNCATE TABLE bronze.crm_prd_info;
+	SET @end_time = GETDATE();
+	PRINT '>>Load Duration: ' + CAST(DATEDIFF(second, @start_time, @end_time) AS NVARCHAR) + ' seconds';
+	PRINT '>> ----------------';
 
-		PRINT '>>>>Inserting Data Into: bronze.crm_prd_info';
-		BULK INSERT bronze.crm_prd_info
-		FROM 'C:\Users\Patrick Sanchez\Downloads\E-commerce project\crm_prd_info.csv'
-		WITH (
-			FIRSTROW = 2,
-			FIELDTERMINATOR = ',',
-			TABLOCK
-		);
-		SET @end_time = GETDATE();
-		PRINT '>>Load Duration: ' + CAST(DATEDIFF(second, @start_time, @end_time) AS NVARCHAR) + ' seconds';
-		PRINT '>> ----------------';
+	SET @start_time =GETDATE();
+	PRINT '>>>>Truncating Table: bronze.SalesFact';
+	TRUNCATE TABLE bronze.SalesFact;
 
-		SET @start_time = GETDATE();
-		PRINT '>>>>Truncating Table: bronze.crm_sales_details';
-		TRUNCATE TABLE bronze.crm_sales_details;
+	PRINT '>>>>Inserting Data Into: bronze.SalesFact';
+	BULK INSERT bronze.SalesFact
+	FROM 'C:\Users\Patrick Sanchez\Downloads\mytruckpoint\SalesFact.csv'
+	WITH (
 
-		PRINT '>>>>Inserting Data Into: bronze.crm_sales_details';
-		BULK INSERT bronze.crm_sales_details
-		FROM 'C:\Users\Patrick Sanchez\Downloads\E-commerce project\crm_sales_details.csv'
-		WITH (
-			FIRSTROW = 2,
-			FIELDTERMINATOR = ',',
-			TABLOCK
-		);
-		SET @end_time = GETDATE();
-		PRINT '>>Load Duration: ' + CAST(DATEDIFF(second, @start_time, @end_time) AS NVARCHAR) + ' seconds';
-		PRINT '>> ----------------';
+		FIRSTROW = 2,
+		FIELDTERMINATOR = ',',
+		ROWTERMINATOR = '0x0a',
+		TABLOCK
+	);
 
-		PRINT '-------------------------------------------------------------';
-		PRINT 'Loading ERP Tables';
-		PRINT '-------------------------------------------------------------';
+	SET @end_time = GETDATE();
+	PRINT '>>Load Duration: ' + CAST(DATEDIFF(second, @start_time, @end_time) AS NVARCHAR) + ' seconds';
+	PRINT '>> ----------------';
 
-		SET @start_time = GETDATE();
-		PRINT '>>>>Truncating Table: bronze.erp_cust_az12';
-		TRUNCATE TABLE bronze.erp_cust_az12;
+	SET @start_time =GETDATE();
+	PRINT '>>>>Truncating Table: bronze.ShipmentFact';
+	TRUNCATE TABLE bronze.ShipmentFact;
 
-		PRINT '>>>>Inserting Data Into: bronze.erp_cust_az12';
-		BULK INSERT bronze.erp_cust_az12
-		FROM 'C:\Users\Patrick Sanchez\Downloads\E-commerce project\erp_cust_az12.csv'
-		WITH (
-			FIRSTROW = 2,
-			FIELDTERMINATOR = ',',
-			TABLOCK
-		);
+	PRINT '>>>>Inserting Data Into: bronze.ShipmentFact';
+	BULK INSERT bronze.ShipmentFact
+	FROM 'C:\Users\Patrick Sanchez\Downloads\mytruckpoint\ShipmentFact.csv'
+	WITH (
 
-		SET @end_time = GETDATE();
-		PRINT '>>Load Duration: ' + CAST(DATEDIFF(second, @start_time, @end_time) AS NVARCHAR) + ' seconds';
-		PRINT '>> ----------------';
+		FIRSTROW = 2,
+		FIELDTERMINATOR = ',',
+		ROWTERMINATOR = '0x0a',
+		TABLOCK
+	);
 
+	SET @end_time = GETDATE();
+	PRINT '>>Load Duration: ' + CAST(DATEDIFF(second, @start_time, @end_time) AS NVARCHAR) + ' seconds';
+	PRINT '>> ----------------';
 
-		SET @start_time = GETDATE();
-		PRINT '>>>>Truncating Table: bronze.erp_loc_a101';
-		TRUNCATE TABLE bronze.erp_loc_a101;
+	SET @start_time =GETDATE();
+	PRINT '>>>>Truncating Table: bronze.SupplierDim';
+	TRUNCATE TABLE bronze.SupplierDim;
 
-		PRINT '>>>>Inserting Data Into: bronze.erp_loc_a101';
-		BULK INSERT bronze.erp_loc_a101
-		FROM 'C:\Users\Patrick Sanchez\Downloads\E-commerce project\erp_loc_a101.csv'
-		WITH (
-			FIRSTROW = 2,
-			FIELDTERMINATOR = ',',
-			TABLOCK
-		);
+	PRINT '>>>>Inserting Data Into: bronze.SupplierDim';
+	BULK INSERT bronze.SupplierDim
+	FROM 'C:\Users\Patrick Sanchez\Downloads\mytruckpoint\SupplierDim.csv'
+	WITH (
 
-		SET @end_time = GETDATE();
-		PRINT '>>Load Duration: ' + CAST(DATEDIFF(second, @start_time, @end_time) AS NVARCHAR) + ' seconds';
-		PRINT '>> ----------------';
+		FIRSTROW = 2,
+		FIELDTERMINATOR = ',',
+		ROWTERMINATOR = '0x0a',
+		TABLOCK
+	);
 
-		SET @start_time = GETDATE();
-		PRINT '>>>>Truncating Table: bronze.erp_px_cat_g1v2';
-		TRUNCATE TABLE bronze.erp_px_cat_g1v2;
+	SET @end_time = GETDATE();
+	PRINT '>>Load Duration: ' + CAST(DATEDIFF(second, @start_time, @end_time) AS NVARCHAR) + ' seconds';
+	PRINT '>> ----------------';
 
-		PRINT '>>>>Inserting Data Into: bronze.erp_px_cat_g1v2';
-		BULK INSERT bronze.erp_px_cat_g1v2
-		FROM 'C:\Users\Patrick Sanchez\Downloads\E-commerce project\erp_px_cat_g1v2.csv'
-		WITH (
-			FIRSTROW = 2,
-			FIELDTERMINATOR = ',',
-			TABLOCK
-		);
-		SET @end_time = GETDATE();
-		PRINT '>>Load Duration: ' + CAST(DATEDIFF(second, @start_time, @end_time) AS NVARCHAR) + ' seconds';
-		PRINT '>> ----------------';
+	SET @start_time =GETDATE();
+	PRINT '>>>>Truncating Table: bronze.TimeDim';
+	TRUNCATE TABLE bronze.TimeDim;
+
+	PRINT '>>>>Inserting Data Into: bronze.TimeDim';
+	BULK INSERT bronze.TimeDim
+	FROM 'C:\Users\Patrick Sanchez\Downloads\mytruckpoint\TimeDim.csv'
+	WITH (
+
+		FIRSTROW = 2,
+		FIELDTERMINATOR = ',',
+		ROWTERMINATOR = '0x0a',
+		TABLOCK
+	);
+
+	SET @end_time = GETDATE();
+	PRINT '>>Load Duration: ' + CAST(DATEDIFF(second, @start_time, @end_time) AS NVARCHAR) + ' seconds';
+	PRINT '>> ----------------';
 
 		SET @batch_end_time = GETDATE();
 		PRINT '================================================================='
