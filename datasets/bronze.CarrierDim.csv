@@ -1,0 +1,10 @@
+﻿CarrierID,CarrierName,ServiceLevel
+815,Canada Post,Expedited
+816,Purolator,Ground
+817,FedEx Ground,Ground
+818,UPS,Standard
+819,Canpar,Ground
+820,Loomis Express,Ground
+821,DHL eCommerce,International
+822,GLS,Ground
+823,TForce,Freight
