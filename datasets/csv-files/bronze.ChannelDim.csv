@@ -1,0 +1,14 @@
+﻿ChannelID,SalesChannel,CampaignID,SourceMedium,AffiliatePartner
+880,Web,CA-001,google / cpc,RedFlagDeals
+881,InStore,CA-002,bing / cpc,ShareASale
+882,MobileApp,CA-003,facebook / paid,Rakuten
+883,Web,CA-004,instagram / paid,Rakuten
+884,Web,CA-005,email / newsletter,Commission Junction
+885,Marketplace,CA-006,youtube / video,ShareASale
+886,MobileApp,CA-007,direct / none,AutoAccessoriesCa
+887,InStore,CA-008,referral / reddit,Rakuten
+888,InStore,CA-009,affiliate / partner,RedFlagDeals
+889,InStore,CA-010,tiktok / paid,Rakuten
+890,Web,CA-011,organic / seo,Rakuten
+891,MobileApp,CA-012,sms / promo,None
+892,MobileApp,CA-013,display / gdn,None

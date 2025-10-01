@@ -1,0 +1,318 @@
+﻿LocationID,City,State,Country,ZipCode,MarketSegment
+573,Brampton,Manitoba,Canada,L0K 4M1,Urban
+574,Vancouver,Alberta,Canada,C6G 3G2,Suburban
+575,Montreal,Saskatchewan,Canada,N8H 7L0,Rural
+576,Toronto,Ontario,Canada,K3M 2P9,Urban
+577,Red Deer,Ontario,Canada,V1S 5N3,Urban
+578,Montreal,Ontario,Canada,Y2N 1H2,Urban
+579,Burnaby,Ontario,Canada,S3K 8R0,Suburban
+580,Burlington,Ontario,Canada,B5T 4T1,Urban
+581,Gatineau,British Columbia,Canada,Y6V 7A1,Urban
+582,Quebec City,Ontario,Canada,K8E 9V4,Rural
+583,Vancouver,Quebec,Canada,Y0E 5H2,Urban
+584,London,Ontario,Canada,J4M 5E6,Suburban
+585,Saskatoon,British Columbia,Canada,Y7E 4B9,Urban
+586,Saskatoon,Ontario,Canada,N9C 0C8,Urban
+587,Montreal,British Columbia,Canada,Y1M 2Y9,Urban
+588,Burlington,British Columbia,Canada,P7E 4T9,Rural
+589,Regina,Alberta,Canada,M0B 5M1,Rural
+590,Edmonton,Ontario,Canada,E2L 6N2,Rural
+591,Hamilton,British Columbia,Canada,A4J 8X2,Suburban
+592,Montreal,Ontario,Canada,N4K 0B6,Rural
+593,Halifax,British Columbia,Canada,V2T 5V0,Urban
+594,Burnaby,Saskatchewan,Canada,B2T 5X8,Suburban
+595,Markham,New Brunswick,Canada,N3G 1C0,Suburban
+596,Windsor,Ontario,Canada,B3T 3E7,Suburban
+597,Oakville,British Columbia,Canada,N5S 9G6,Suburban
+598,Brampton,British Columbia,Canada,R8M 9A8,Urban
+599,Gatineau,Ontario,Canada,V8P 9N2,Urban
+600,Edmonton,New Brunswick,Canada,G2G 3T1,Urban
+601,Ottawa,New Brunswick,Canada,S7B 8S8,Urban
+602,Ottawa,Ontario,Canada,H6S 7M3,Suburban
+603,Kelowna,Ontario,Canada,C1N 2G4,Suburban
+604,Winnipeg,Alberta,Canada,C6S 2R3,Rural
+605,Toronto,Saskatchewan,Canada,K6M 7T1,Urban
+606,Mississauga,Ontario,Canada,T0Y 3L0,Suburban
+607,Gatineau,British Columbia,Canada,P3G 7G5,Suburban
+608,Red Deer,British Columbia,Canada,A9A 2V5,Rural
+609,Calgary,Alberta,Canada,J6A 4Y5,Rural
+610,Moncton,Quebec,Canada,Y6J 4T3,Urban
+611,Montreal,Ontario,Canada,Y3Y 8P9,Suburban
+612,Montreal,Manitoba,Canada,P7G 2B1,Urban
+613,Quebec City,British Columbia,Canada,V7C 2C2,Suburban
+614,Surrey,Ontario,Canada,T3A 0B4,Urban
+615,Brampton,British Columbia,Canada,B5L 9N5,Rural
+616,Surrey,British Columbia,Canada,X4M 2S0,Rural
+617,Calgary,Ontario,Canada,T7J 2S1,Suburban
+618,Halifax,British Columbia,Canada,X1K 9V4,Suburban
+619,Brampton,Saskatchewan,Canada,M3H 9A4,Urban
+620,Oakville,Ontario,Canada,E6T 3V4,Urban
+621,Burnaby,Alberta,Canada,P1L 5T4,Rural
+622,Kelowna,Ontario,Canada,M4V 3H6,Rural
+623,Edmonton,Ontario,Canada,H8H 5L2,Urban
+624,Ottawa,Saskatchewan,Canada,G6E 4Y5,Rural
+625,Kitchener,British Columbia,Canada,M3G 5G4,Rural
+626,Brampton,British Columbia,Canada,A5G 9E7,Suburban
+627,Mississauga,British Columbia,Canada,H5Y 7B7,Urban
+628,Windsor,Ontario,Canada,N7E 3K8,Suburban
+629,Edmonton,British Columbia,Canada,V0X 8V7,Suburban
+630,Burnaby,Quebec,Canada,H4J 1S1,Rural
+631,Surrey,Ontario,Canada,E2Y 6J4,Rural
+632,Brampton,Manitoba,Canada,K3S 2J9,Rural
+633,Montreal,Ontario,Canada,V7X 6C5,Suburban
+634,Quebec City,Nova Scotia,Canada,M0C 3Y4,Urban
+635,Winnipeg,Alberta,Canada,E6X 5C0,Rural
+636,Burlington,British Columbia,Canada,N3M 4R6,Rural
+637,Gatineau,New Brunswick,Canada,M5T 4P1,Suburban
+638,Windsor,British Columbia,Canada,B1L 6C0,Rural
+639,Ottawa,Ontario,Canada,E1L 6S1,Rural
+640,Red Deer,Ontario,Canada,X6X 6Y1,Suburban
+641,Red Deer,British Columbia,Canada,H4H 0J7,Urban
+642,Red Deer,British Columbia,Canada,V5J 2N8,Suburban
+643,Kelowna,British Columbia,Canada,C0A 3B4,Urban
+644,Markham,Quebec,Canada,X0J 7J2,Rural
+645,Toronto,Ontario,Canada,C0H 1X5,Suburban
+646,London,Ontario,Canada,V2E 5N7,Urban
+647,Richmond,Ontario,Canada,A9H 1T0,Urban
+648,Burlington,Ontario,Canada,E9E 1J5,Urban
+649,Edmonton,British Columbia,Canada,V0X 0P2,Urban
+650,Calgary,Quebec,Canada,S6P 0A8,Rural
+651,Calgary,Ontario,Canada,H6E 7S7,Suburban
+652,Brampton,New Brunswick,Canada,N5X 2L0,Suburban
+653,Brampton,British Columbia,Canada,T2V 7J3,Urban
+654,Halifax,Saskatchewan,Canada,R6Y 9L1,Suburban
+655,Oakville,Ontario,Canada,J6G 3P1,Urban
+656,Mississauga,British Columbia,Canada,A2T 6H4,Suburban
+657,Markham,Ontario,Canada,N8R 9A0,Suburban
+658,Ottawa,British Columbia,Canada,N5G 1P1,Urban
+659,Kitchener,Saskatchewan,Canada,N3L 2X0,Rural
+660,Montreal,Saskatchewan,Canada,C0R 0A2,Urban
+661,Burlington,Ontario,Canada,K8E 5C6,Urban
+662,Saskatoon,British Columbia,Canada,T5R 6M3,Rural
+663,Winnipeg,Ontario,Canada,G9N 8L4,Urban
+664,Quebec City,Alberta,Canada,B4V 4G6,Urban
+665,Windsor,Ontario,Canada,T3Y 3J3,Urban
+666,Halifax,Alberta,Canada,A5K 2A0,Suburban
+667,Moncton,Ontario,Canada,G9L 0N2,Rural
+668,Moncton,Alberta,Canada,Y7J 3K1,Suburban
+669,Surrey,Quebec,Canada,V0N 6Y6,Rural
+670,Regina,Nova Scotia,Canada,V3S 0K8,Urban
+671,Gatineau,Ontario,Canada,N7C 4Y6,Urban
+672,Calgary,Ontario,Canada,P4V 1P5,Suburban
+673,Regina,Saskatchewan,Canada,P7J 5B7,Suburban
+674,Hamilton,Ontario,Canada,E6E 6E2,Suburban
+675,Winnipeg,Nova Scotia,Canada,R9N 4R0,Suburban
+676,Toronto,Nova Scotia,Canada,L8N 7R2,Suburban
+677,Halifax,Ontario,Canada,M7G 2Y4,Rural
+678,Saskatoon,British Columbia,Canada,E0Y 2E0,Urban
+679,Oakville,Alberta,Canada,S7V 8G9,Suburban
+680,Burlington,Ontario,Canada,K7B 3C1,Rural
+681,Montreal,Nova Scotia,Canada,G7S 9Y8,Suburban
+682,Burnaby,Alberta,Canada,G5T 9N2,Rural
+683,Hamilton,Quebec,Canada,B4P 0R6,Rural
+684,Kitchener,Ontario,Canada,R8H 1S4,Rural
+685,Montreal,Ontario,Canada,R1K 5A0,Suburban
+686,Markham,British Columbia,Canada,A7H 1E7,Suburban
+687,Barrie,Ontario,Canada,J9M 1M4,Rural
+688,Moncton,Ontario,Canada,L9J 2L4,Suburban
+689,Oakville,New Brunswick,Canada,G0K 3B2,Suburban
+690,Edmonton,Quebec,Canada,H1C 6C2,Urban
+691,Markham,Nova Scotia,Canada,P5S 5J8,Urban
+692,Burnaby,Quebec,Canada,M1T 2S8,Suburban
+693,Richmond,Ontario,Canada,P3G 5T5,Suburban
+694,Mississauga,Quebec,Canada,S5S 6R6,Suburban
+695,Markham,Quebec,Canada,Y6C 1M4,Suburban
+696,Oakville,Saskatchewan,Canada,L7J 8L2,Suburban
+697,Moncton,Ontario,Canada,N0A 2Y7,Suburban
+698,Kitchener,British Columbia,Canada,H0N 9A2,Rural
+699,Toronto,Alberta,Canada,X3G 2Y1,Rural
+700,Quebec City,Ontario,Canada,M7C 1Y4,Urban
+701,Brampton,Manitoba,Canada,K9L 7H3,Rural
+702,Quebec City,Ontario,Canada,H6G 9T9,Suburban
+703,Barrie,Ontario,Canada,J5A 2P1,Urban
+704,Ottawa,Manitoba,Canada,A4B 8M8,Urban
+705,Calgary,Ontario,Canada,J0P 6S7,Rural
+706,Regina,Manitoba,Canada,L6G 5A7,Urban
+707,Ottawa,Ontario,Canada,R6G 5G1,Urban
+708,Red Deer,Ontario,Canada,H5K 3N4,Urban
+709,Edmonton,British Columbia,Canada,B1M 9H1,Rural
+710,Markham,Manitoba,Canada,B6E 4B4,Suburban
+711,Surrey,Ontario,Canada,L2T 8A3,Rural
+712,Surrey,New Brunswick,Canada,V1L 5N4,Suburban
+713,Red Deer,Ontario,Canada,E2L 8C4,Suburban
+714,Calgary,Ontario,Canada,M2B 6B1,Urban
+715,London,Quebec,Canada,V9T 8N9,Rural
+716,Calgary,Manitoba,Canada,N9J 4G5,Suburban
+717,Saskatoon,Ontario,Canada,Y4C 6X4,Rural
+718,Gatineau,Ontario,Canada,X0N 7L6,Rural
+719,Toronto,Ontario,Canada,B9B 4G5,Suburban
+720,Saskatoon,Ontario,Canada,V3L 0V4,Urban
+721,Moncton,Quebec,Canada,J6S 9X5,Urban
+722,Mississauga,Ontario,Canada,K5P 7K8,Urban
+723,Quebec City,British Columbia,Canada,E0T 2P4,Urban
+724,Calgary,Ontario,Canada,X1P 5P9,Urban
+725,Hamilton,Ontario,Canada,H7Y 4V0,Suburban
+726,Brampton,Ontario,Canada,G1R 6N9,Urban
+727,Kelowna,British Columbia,Canada,R3P 2E0,Urban
+728,Mississauga,Ontario,Canada,M4S 7L6,Rural
+729,Moncton,Alberta,Canada,B6X 2G9,Urban
+730,Markham,British Columbia,Canada,A1T 0B1,Suburban
+731,Winnipeg,Ontario,Canada,R7S 8V6,Suburban
+732,Burnaby,Ontario,Canada,K3L 0M9,Rural
+733,Vancouver,Ontario,Canada,A6K 8N4,Urban
+734,Montreal,British Columbia,Canada,H3E 0C5,Urban
+735,Halifax,Ontario,Canada,R7X 0E8,Rural
+736,Calgary,Ontario,Canada,L0N 1Y5,Suburban
+737,Gatineau,New Brunswick,Canada,Y9N 3C9,Rural
+738,Quebec City,Ontario,Canada,C4X 0C6,Suburban
+739,Oakville,Ontario,Canada,P2X 0K3,Rural
+740,Kelowna,Ontario,Canada,E7P 3N8,Suburban
+741,Vancouver,British Columbia,Canada,A1V 1B2,Suburban
+742,Windsor,Ontario,Canada,A3S 4H2,Suburban
+743,Richmond,Alberta,Canada,E0A 8S0,Suburban
+744,Richmond,Ontario,Canada,C8H 4V8,Suburban
+745,Surrey,Ontario,Canada,R0A 8G8,Rural
+746,Montreal,Ontario,Canada,B5Y 7N3,Rural
+747,Halifax,Ontario,Canada,C6B 8L7,Suburban
+748,Quebec City,Quebec,Canada,T3K 2P7,Suburban
+749,Markham,Ontario,Canada,M4P 6B2,Urban
+750,Regina,Quebec,Canada,B5N 8Y4,Urban
+751,Windsor,Quebec,Canada,N6L 7C4,Urban
+752,Mississauga,Ontario,Canada,M6Y 5G5,Suburban
+753,Calgary,Manitoba,Canada,B1R 5B4,Rural
+754,Regina,Ontario,Canada,R6X 6V4,Rural
+755,Surrey,Ontario,Canada,C9B 4R9,Rural
+756,London,Ontario,Canada,K9H 3L9,Suburban
+757,London,Quebec,Canada,H4K 9K6,Rural
+758,Red Deer,Ontario,Canada,S5G 6L7,Urban
+759,Toronto,Manitoba,Canada,T0A 1V7,Suburban
+760,London,British Columbia,Canada,M5R 2H0,Rural
+761,Oakville,Ontario,Canada,X9N 9P2,Rural
+762,Winnipeg,Ontario,Canada,R9V 8V8,Suburban
+763,Gatineau,Manitoba,Canada,K3N 3H6,Rural
+764,Burnaby,Ontario,Canada,A9T 0K3,Rural
+765,Surrey,Ontario,Canada,J1E 1T8,Rural
+766,Ottawa,Ontario,Canada,B9T 1Y0,Urban
+767,Kelowna,New Brunswick,Canada,S1E 8H5,Urban
+768,Kelowna,Quebec,Canada,V6A 0M1,Rural
+769,Surrey,British Columbia,Canada,J2K 4M1,Suburban
+770,Kelowna,Ontario,Canada,V9K 4M2,Suburban
+771,Moncton,British Columbia,Canada,V3J 6P6,Suburban
+772,Red Deer,Ontario,Canada,S5V 9H2,Rural
+773,Burnaby,Alberta,Canada,J5X 4V7,Urban
+774,Regina,Ontario,Canada,P5P 0B9,Rural
+775,Vancouver,British Columbia,Canada,V1P 8C9,Rural
+776,Red Deer,British Columbia,Canada,L4K 9L2,Suburban
+777,Kelowna,New Brunswick,Canada,M0Y 0Y6,Suburban
+778,Kitchener,Saskatchewan,Canada,J0N 5J6,Urban
+779,Burlington,British Columbia,Canada,C3N 3T3,Suburban
+780,Mississauga,Saskatchewan,Canada,B9V 2X6,Suburban
+781,London,Saskatchewan,Canada,X6L 6N8,Suburban
+782,Markham,Quebec,Canada,A2X 7M0,Urban
+783,Moncton,Ontario,Canada,B0Y 9N5,Suburban
+784,Halifax,Ontario,Canada,J6Y 7C9,Rural
+785,Kitchener,Saskatchewan,Canada,L4N 8Y9,Suburban
+786,Kitchener,Nova Scotia,Canada,A5S 7N2,Suburban
+787,Windsor,Alberta,Canada,S4M 7X9,Rural
+788,Richmond,Alberta,Canada,P9L 8C6,Urban
+789,Saskatoon,Nova Scotia,Canada,G8P 6X9,Suburban
+790,Moncton,Saskatchewan,Canada,S1M 2T9,Urban
+791,Toronto,Ontario,Canada,R1Y 8C0,Suburban
+792,Burlington,Saskatchewan,Canada,B8L 1T0,Rural
+793,London,British Columbia,Canada,C4A 3T5,Suburban
+794,Montreal,Quebec,Canada,M0P 9V9,Suburban
+795,Windsor,Alberta,Canada,G7H 4M9,Rural
+796,Brampton,Ontario,Canada,V0J 9M6,Rural
+797,Windsor,Ontario,Canada,A7R 8C2,Suburban
+798,Burnaby,British Columbia,Canada,L6T 0A6,Urban
+799,Kitchener,British Columbia,Canada,J3A 9V9,Suburban
+800,Richmond,Ontario,Canada,L6B 6H5,Rural
+801,Richmond,Nova Scotia,Canada,N7L 2P1,Suburban
+802,Montreal,Ontario,Canada,H4E 2R3,Suburban
+803,Saskatoon,Ontario,Canada,X2S 6L9,Suburban
+804,Gatineau,Alberta,Canada,P5B 6K8,Urban
+805,Edmonton,British Columbia,Canada,S1S 3A9,Rural
+806,Red Deer,British Columbia,Canada,B4V 1T3,Urban
+807,Saskatoon,Ontario,Canada,R0S 6M6,Suburban
+808,Hamilton,Ontario,Canada,C1G 4M4,Urban
+809,Quebec City,Manitoba,Canada,V1B 7J0,Suburban
+810,Barrie,Saskatchewan,Canada,L3J 9G4,Urban
+811,Montreal,Ontario,Canada,H8R 3S4,Rural
+812,Kelowna,Quebec,Canada,A9N 5B0,Suburban
+813,Moncton,British Columbia,Canada,H2B 9E0,Suburban
+814,Vancouver,Ontario,Canada,L0Y 9J4,Suburban
+815,Toronto,British Columbia,Canada,A5B 4R1,Suburban
+816,Oakville,British Columbia,Canada,T9J 3P0,Rural
+817,Gatineau,Quebec,Canada,S3T 6N1,Rural
+818,Burlington,Quebec,Canada,V3H 7X9,Rural
+819,Kitchener,Manitoba,Canada,H6G 4J1,Suburban
+820,Hamilton,Ontario,Canada,M0B 6C6,Urban
+821,Regina,Ontario,Canada,S0L 6P0,Urban
+822,Richmond,Alberta,Canada,A6X 7N5,Urban
+823,Calgary,Ontario,Canada,A0A 5B5,Rural
+824,Mississauga,British Columbia,Canada,J2T 3J4,Rural
+825,Moncton,Ontario,Canada,G8S 7H6,Urban
+826,Burnaby,Ontario,Canada,A9V 9P3,Urban
+827,London,Alberta,Canada,H8J 9K4,Rural
+828,Saskatoon,Quebec,Canada,M5C 7Y8,Urban
+829,Surrey,Ontario,Canada,P9M 2H0,Suburban
+830,Quebec City,Nova Scotia,Canada,Y5K 0B9,Suburban
+831,Regina,Ontario,Canada,H0H 4S3,Rural
+832,Quebec City,British Columbia,Canada,R1X 5R5,Suburban
+833,Surrey,Alberta,Canada,A4V 4A1,Rural
+834,Vancouver,Quebec,Canada,N1K 1V3,Urban
+835,Surrey,Ontario,Canada,L1B 9V0,Suburban
+836,Vancouver,Ontario,Canada,P5J 3K2,Urban
+837,Windsor,Nova Scotia,Canada,E4X 0A7,Rural
+838,Moncton,Quebec,Canada,Y0K 0V0,Suburban
+839,Edmonton,Alberta,Canada,N2M 8S8,Suburban
+840,Barrie,Ontario,Canada,N2T 6R8,Suburban
+841,Barrie,Manitoba,Canada,P3A 2P4,Urban
+842,Kelowna,Ontario,Canada,X9K 6Y3,Urban
+843,Toronto,Quebec,Canada,J6X 6V0,Urban
+844,Markham,Alberta,Canada,B3N 1B6,Urban
+845,Hamilton,Ontario,Canada,E6K 4E4,Urban
+846,Montreal,Ontario,Canada,K1Y 1K8,Urban
+847,Halifax,Quebec,Canada,V5S 0L3,Rural
+848,Winnipeg,Ontario,Canada,K8V 2P4,Suburban
+849,Kelowna,Ontario,Canada,X6J 9Y4,Rural
+850,Mississauga,British Columbia,Canada,E8H 5K7,Rural
+851,Richmond,New Brunswick,Canada,P3N 6J1,Suburban
+852,Vancouver,Ontario,Canada,N4N 5Y5,Urban
+853,Kelowna,Alberta,Canada,S1G 4X0,Suburban
+854,Surrey,British Columbia,Canada,M0M 2K6,Suburban
+855,Burlington,Ontario,Canada,T1S 1V6,Rural
+856,Kitchener,Alberta,Canada,T4X 3B5,Suburban
+857,Markham,Quebec,Canada,J8K 8B5,Rural
+858,Windsor,Ontario,Canada,S5M 3M8,Rural
+859,Hamilton,Alberta,Canada,R8N 4B7,Suburban
+860,Markham,British Columbia,Canada,T5G 4M8,Suburban
+861,Brampton,Ontario,Canada,E3E 6B6,Suburban
+862,Moncton,Ontario,Canada,Y5V 4J6,Urban
+863,Hamilton,British Columbia,Canada,S2S 8G5,Suburban
+864,Mississauga,Ontario,Canada,G5G 1N2,Rural
+865,Regina,Saskatchewan,Canada,J3P 1A7,Rural
+866,Halifax,Quebec,Canada,R2H 2V9,Urban
+867,Red Deer,Nova Scotia,Canada,H1V 1C4,Urban
+868,Red Deer,Alberta,Canada,C6J 6C4,Suburban
+869,Markham,Ontario,Canada,N2G 0B7,Suburban
+870,Vancouver,Ontario,Canada,N6G 0G5,Suburban
+871,Burlington,Ontario,Canada,N2H 9H6,Suburban
+872,Saskatoon,Alberta,Canada,J0M 9Y9,Rural
+873,Kelowna,Ontario,Canada,M6S 7K3,Rural
+874,Kitchener,Ontario,Canada,M4B 8P0,Rural
+875,Richmond,Manitoba,Canada,V6M 9S7,Rural
+876,Surrey,Ontario,Canada,X5R 2H0,Urban
+877,Burlington,Ontario,Canada,G2A 1V5,Rural
+878,Oakville,British Columbia,Canada,P2N 2P2,Suburban
+879,Ottawa,Saskatchewan,Canada,C6B 1G7,Rural
+880,Surrey,British Columbia,Canada,E0G 7X2,Suburban
+881,Barrie,Ontario,Canada,X3K 6M5,Urban
+882,Burnaby,Alberta,Canada,C0V 2B8,Suburban
+883,Calgary,Ontario,Canada,X0K 3N3,Urban
+884,Burnaby,British Columbia,Canada,Y7Y 8B1,Urban
+885,Red Deer,Ontario,Canada,Y3K 0E0,Suburban
+886,Saskatoon,Ontario,Canada,V5M 7C6,Rural
+887,Surrey,Saskatchewan,Canada,A2K 4L0,Urban
+888,Montreal,Ontario,Canada,C3K 8A2,Rural
+889,Vancouver,Ontario,Canada,P4H 9B2,Rural

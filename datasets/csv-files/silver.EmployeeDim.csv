@@ -1,0 +1,158 @@
+﻿EmployeeID,EmployeeName,Role,Department,SalesRegion,CommissionRate
+247,Sophia Johnson,Sales Associate,Marketing,Ontario,0.04
+248,Chloe Baker,CSR,Customer Service,British Columbia,0.03
+249,Henry Brown,CSR,Warehouse,Atlantic Canada,0.04
+250,Amelia Gagnon,Sales Associate,Customer Service,Alberta,0.04
+251,Lucas Morin,CSR,Customer Service,Quebec,0.04
+252,├ëloise Tremblay,CSR,Retail,Quebec,0.05
+253,Oliver Taylor,CSR,Warehouse,Atlantic Canada,0.03
+254,Antoine Fortin,CSR,Marketing,Quebec,0.04
+255,Maxime Tremblay,Manager,Marketing,Quebec,0.03
+256,Catherine C├┤t├⌐,Manager,Customer Service,Quebec,0.03
+257,Layla Bautista,Manager,Customer Service,Manitoba,0.07
+258,Riya Huang,Sales Associate,Customer Service,Ontario,0.05
+259,Katrina Wu,Sales Associate,E-Commerce,Alberta,0.04
+260,Liam Singh,CSR,E-Commerce,Alberta,0.03
+261,Grace Li,Sales Associate,Operations,British Columbia,0.03
+262,Julien Roy,Manager,Warehouse,Quebec,0.03
+263,Amelia Chan,CSR,Retail,British Columbia,0.05
+264,Jason Taylor,CSR,Warehouse,British Columbia,0.04
+265,Olivia Dela Cruz,Sales Associate,Customer Service,Alberta,0.05
+266,Sophie Gauthier,CSR,Warehouse,Quebec,0.02
+267,Olivia Stewart,CSR,Retail,Atlantic Canada,0.02
+268,Jason Khalil,CSR,Operations,Ontario,0.04
+269,Benjamin Castillo,CSR,Warehouse,Ontario,0.02
+270,Sophia Parker,CSR,Warehouse,Atlantic Canada,0.02
+271,Henry Wang,CSR,Marketing,British Columbia,0.04
+272,Oliver Parker,CSR,Operations,Atlantic Canada,0.04
+273,Emily Park,Sales Associate,Operations,British Columbia,0.04
+274,Connor Stewart,Sales Associate,Retail,Atlantic Canada,0.01
+275,Carlo Park,CSR,Customer Service,Ontario,0.03
+276,Karan Flores,CSR,Marketing,Ontario,0.02
+277,Oliver Smith,Manager,Warehouse,Atlantic Canada,0.02
+278,Antoine Bouchard,Manager,Operations,Quebec,0.03
+279,Benjamin Kim,Sales Associate,Marketing,British Columbia,0.01
+280,Antoine Gagnon,Sales Associate,Marketing,Quebec,0.02
+281,Miguel Sidhu,CSR,Warehouse,Ontario,0.02
+282,Sophia O'Connor,CSR,Retail,Atlantic Canada,0.05
+283,Rohit Singh,Sales Associate,Marketing,Manitoba,0.03
+284,Vivian Chen,Manager,Warehouse,British Columbia,0.01
+285,Laurent Bouchard,Manager,Retail,Quebec,0.03
+286,Leo Dela Cruz,Manager,Retail,Ontario,0.02
+287,├ëmilie Fortin,Manager,E-Commerce,Quebec,0.02
+288,Olivier Singh,CSR,E-Commerce,Alberta,0.05
+289,Grace Dela Cruz,Sales Associate,Operations,Alberta,0.02
+290,Jack O'Connor,CSR,E-Commerce,Atlantic Canada,0.04
+291,Sophia Tran,Sales Associate,E-Commerce,British Columbia,0.06
+292,Alex Saleh,Manager,Operations,Ontario,0.03
+293,Henry Joshi,Sales Associate,E-Commerce,Manitoba,0.03
+294,James Nguyen,Sales Associate,E-Commerce,Manitoba,0.03
+295,Angela Sidhu,Sales Associate,Retail,Ontario,0.03
+296,Jack Sharma,CSR,E-Commerce,Ontario,0.05
+297,Christine Nguyen,Sales Associate,Marketing,Manitoba,0.03
+298,Lucas O'Connor,Sales Associate,Retail,Atlantic Canada,0.05
+299,Layla Wu,Manager,Operations,Ontario,0.02
+300,Hassan Stewart,Manager,Marketing,Ontario,0.01
+301,Alexandre L├⌐vesque,Sales Associate,Customer Service,Alberta,0.05
+302,Olivier Zhang,Manager,Marketing,Alberta,0.04
+303,Grace Huang,Manager,Customer Service,British Columbia,0.04
+304,Angela Zhang,Manager,Marketing,Ontario,0.05
+305,Julien L├⌐vesque,Sales Associate,Customer Service,Alberta,0.02
+306,John Paul Saleh,Sales Associate,Retail,Manitoba,0.05
+307,Olivia Ahmed,Manager,Customer Service,Ontario,0.01
+308,Lucas Bouchard,Sales Associate,E-Commerce,Alberta,0.03
+309,Chlo├⌐ Roy,Manager,E-Commerce,Quebec,0.05
+310,Declan Walker,CSR,Marketing,Atlantic Canada,0.05
+311,Grace Johnson,CSR,Customer Service,Atlantic Canada,0.03
+312,Dev Dela Cruz,CSR,Retail,Manitoba,0.04
+313,Maxime L├⌐vesque,CSR,Operations,Quebec,0.05
+314,Ava Lin,Manager,Warehouse,British Columbia,0.02
+315,Liam O'Connor,Sales Associate,Operations,Atlantic Canada,0.01
+316,Siobhan Johnson,CSR,Warehouse,Atlantic Canada,0.04
+317,Chloe Chan,CSR,Warehouse,British Columbia,0.04
+318,Brian Baker,CSR,Warehouse,Ontario,0.04
+319,Catherine Flores,CSR,Warehouse,Alberta,0.01
+320,├ëmilie L├⌐vesque,Sales Associate,Operations,Quebec,0.01
+321,├ëmile Bouchard,Sales Associate,Marketing,Quebec,0.06
+322,Mark Patel,Manager,E-Commerce,Manitoba,0.06
+323,Fatima Walker,Sales Associate,Warehouse,Ontario,0.03
+324,Daniel Saleh,Manager,Retail,Ontario,0.03
+325,Charlotte Clark,CSR,Warehouse,British Columbia,0.05
+326,Paolo Ahmed,Sales Associate,Customer Service,Ontario,0.03
+327,Benjamin Parker,CSR,Operations,Atlantic Canada,0.03
+328,Ranya Smith,Sales Associate,Warehouse,Ontario,0.02
+329,Maxime Gauthier,Manager,Marketing,Quebec,0.05
+330,Brian Smith,Manager,Retail,British Columbia,0.05
+331,Sophia Zhang,Sales Associate,Operations,Ontario,0.03
+332,Grace Gill,Manager,Operations,Ontario,0.04
+333,William Baker,Manager,E-Commerce,British Columbia,0.03
+334,Lucas Gagnon,Manager,Marketing,Quebec,0.01
+335,Oliver MacDonald,Sales Associate,Customer Service,Atlantic Canada,0.04
+336,Mia O'Leary,CSR,Retail,Atlantic Canada,0.05
+337,Camille Fortin,Manager,E-Commerce,Quebec,0.03
+338,Ava Morin,Sales Associate,Marketing,Manitoba,0.03
+339,Am├⌐lie Fortin,CSR,Operations,Quebec,0.04
+340,├ëmilie Bouchard,Sales Associate,Warehouse,Quebec,0.03
+341,Genevi├¿ve Pelletier,Sales Associate,Retail,Quebec,0.02
+342,Angelo Gill,Manager,Customer Service,Manitoba,0.02
+343,Maxime Garcia,Manager,E-Commerce,Alberta,0.03
+344,Mariam Kim,Manager,Customer Service,Alberta,0.03
+345,No├⌐mie Fortin,Sales Associate,Marketing,Quebec,0.00
+346,Amy Gauthier,Sales Associate,E-Commerce,Manitoba,0.04
+347,Antoine C├┤t├⌐,CSR,Customer Service,Quebec,0.02
+348,Jack Wong,Manager,E-Commerce,Alberta,0.04
+349,Liam Stewart,Manager,Retail,Atlantic Canada,0.00
+350,Maria Joshi,CSR,Operations,Alberta,0.05
+351,Katrina Verma,Manager,E-Commerce,Manitoba,0.01
+352,Khalid Baker,Manager,Operations,Alberta,0.00
+353,Mathieu Parker,Manager,Operations,Manitoba,0.02
+354,James Haddad,Sales Associate,Warehouse,Ontario,0.00
+355,Emily Clark,Manager,Operations,Ontario,0.06
+356,Genevi├¿ve C├┤t├⌐,Manager,Retail,Quebec,0.02
+357,Laurent Fortin,Sales Associate,Marketing,Quebec,0.01
+358,Emily Baker,Manager,Retail,British Columbia,0.04
+359,Mia Murphy,Sales Associate,Retail,Atlantic Canada,0.02
+360,Daniel Walker,Manager,Operations,British Columbia,0.03
+361,William Johnson,CSR,Warehouse,Atlantic Canada,0.03
+362,Fatima Flores,Manager,Customer Service,Manitoba,0.04
+363,Olivia Walker,Sales Associate,Customer Service,Atlantic Canada,0.04
+364,├ëloise Gagnon,CSR,Warehouse,Quebec,0.05
+365,Henry Garcia,Manager,Warehouse,Manitoba,0.02
+366,Jason Lee,CSR,Retail,British Columbia,0.01
+367,Amelia Chen,Sales Associate,Warehouse,Alberta,0.04
+368,Lucas Taylor,Manager,Retail,Atlantic Canada,0.04
+369,James Walker,CSR,Retail,Atlantic Canada,0.03
+370,Sophie Wu,Sales Associate,Customer Service,Manitoba,0.02
+371,Alex Baker,Manager,E-Commerce,British Columbia,0.01
+372,Oliver Baker,CSR,E-Commerce,Atlantic Canada,0.02
+373,Chloe Johnson,Manager,Warehouse,Atlantic Canada,0.01
+374,Lucas Garcia,CSR,Customer Service,Ontario,0.04
+375,Liam Brown,Manager,Warehouse,British Columbia,0.04
+376,F├⌐lix Kaur,Manager,Marketing,Manitoba,0.02
+377,Christine Tran,Manager,Retail,Ontario,0.03
+378,Am├⌐lie C├┤t├⌐,CSR,E-Commerce,Quebec,0.07
+379,Angela Ibrahim,CSR,E-Commerce,Ontario,0.05
+380,Henry Kaur,CSR,Customer Service,Alberta,0.03
+381,Miguel Smith,Sales Associate,Customer Service,Ontario,0.02
+382,Eric Parker,CSR,Marketing,British Columbia,0.03
+383,Sophia Clark,Manager,Customer Service,Atlantic Canada,0.02
+384,Amelia MacDonald,Sales Associate,Marketing,Atlantic Canada,0.03
+385,Angela Mansour,Manager,Warehouse,Alberta,0.01
+386,Chlo├⌐ C├┤t├⌐,Sales Associate,E-Commerce,Quebec,0.02
+387,Emily Walker,Sales Associate,Warehouse,British Columbia,0.01
+388,Henry Baker,Sales Associate,E-Commerce,Manitoba,0.01
+389,Kevin Johnson,CSR,E-Commerce,British Columbia,0.04
+390,├ëloise Pelletier,CSR,E-Commerce,Quebec,0.05
+391,Emily Zhou,CSR,Warehouse,British Columbia,0.02
+392,Genevi├¿ve Roy,Sales Associate,Customer Service,Quebec,0.05
+393,Noah Parker,Sales Associate,Retail,Atlantic Canada,0.05
+394,Emma Faruqi,Manager,Customer Service,Ontario,0.05
+395,Benjamin Johnson,Manager,Retail,Atlantic Canada,0.03
+396,Maxime Gagnon,Sales Associate,Customer Service,Quebec,0.02
+397,Zain Li,Manager,Marketing,Manitoba,0.05
+398,Ananya Gauthier,CSR,Retail,Manitoba,0.04
+399,Lucas C├┤t├⌐,CSR,E-Commerce,Quebec,0.02
+400,Benjamin Santos,Sales Associate,E-Commerce,Ontario,0.02
+401,Emma Bautista,Sales Associate,E-Commerce,Alberta,0.04
+402,Lucas Pelletier,CSR,Marketing,Quebec,0.02
+403,Kevin Parker,CSR,Retail,British Columbia,0.03
