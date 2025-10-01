@@ -28,12 +28,31 @@ BEGIN
 	PRINT '-------------------------------------------------------------';
 
 	SET @start_time = GETDATE();
+	PRINT '>>>>Truncating Table: bronze.CarrierDim';
+	TRUNCATE TABLE bronze.CarrierDim;
+
+	PRINT '>>>>Inserting Data Into: bronze.CarrierDim';
+	BULK INSERT bronze.CarrierDim
+	FROM 'C:\Users\Patrick Sanchez\Downloads\mytruckpoint_dataset\CarrierDim.csv'
+	WITH (
+
+		FIRSTROW = 2,
+		FIELDTERMINATOR = ',',
+		ROWTERMINATOR = '0x0a',
+		TABLOCK
+	);
+
+	SET @end_time = GETDATE();
+	PRINT '>>Load Duration: ' + CAST(DATEDIFF(second, @start_time, @end_time) AS NVARCHAR) + ' seconds';
+	PRINT '>> ----------------';
+
+	SET @start_time = GETDATE();
 	PRINT '>>>>Truncating Table: bronze.ChannelDim';
 	TRUNCATE TABLE bronze.ChannelDim;
 
 	PRINT '>>>>Inserting Data Into: bronze.ChannelDim';
 	BULK INSERT bronze.ChannelDim
-	FROM 'C:\Users\Patrick Sanchez\Downloads\mytruckpoint\ChannelDim.csv'
+	FROM 'C:\Users\Patrick Sanchez\Downloads\mytruckpoint_dataset\ChannelDim.csv'
 	WITH (
 
 		FIRSTROW = 2,
@@ -52,7 +71,7 @@ BEGIN
 
 	PRINT '>>>>Inserting Data Into: CustomerDim';
 	BULK INSERT bronze.CustomerDim
-	FROM 'C:\Users\Patrick Sanchez\Downloads\mytruckpoint\CustomerDim.csv'
+	FROM 'C:\Users\Patrick Sanchez\Downloads\mytruckpoint_dataset\CustomerDim.csv'
 	WITH (
 
 		FIRSTROW = 2,
@@ -71,7 +90,7 @@ BEGIN
 
 	PRINT '>>>>Inserting Data Into: EmployeeDim';
 	BULK INSERT bronze.EmployeeDim
-	FROM 'C:\Users\Patrick Sanchez\Downloads\mytruckpoint\EmployeeDim.csv'
+	FROM 'C:\Users\Patrick Sanchez\Downloads\mytruckpoint_dataset\EmployeeDim.csv'
 	WITH (
 
 		FIRSTROW = 2,
@@ -90,7 +109,7 @@ BEGIN
 
 	PRINT '>>>>Inserting Data Into: bronze.crm_cust_info';
 	BULK INSERT bronze.InventoryFact
-	FROM 'C:\Users\Patrick Sanchez\Downloads\mytruckpoint\InventoryFact.csv'
+	FROM 'C:\Users\Patrick Sanchez\Downloads\mytruckpoint_dataset\InventoryFact.csv'
 	WITH (
 
 		FIRSTROW = 2,
@@ -109,7 +128,7 @@ BEGIN
 
 	PRINT '>>>>Inserting Data Into: LocationDim';
 	BULK INSERT bronze.LocationDim
-	FROM 'C:\Users\Patrick Sanchez\Downloads\mytruckpoint\LocationDim.csv'
+	FROM 'C:\Users\Patrick Sanchez\Downloads\mytruckpoint_dataset\LocationDim.csv'
 	WITH (
 
 		FIRSTROW = 2,
@@ -128,7 +147,7 @@ BEGIN
 
 	PRINT '>>>>Inserting Data Into: bronze.MarketingFact';
 	BULK INSERT bronze.MarketingFact
-	FROM 'C:\Users\Patrick Sanchez\Downloads\mytruckpoint\MarketingFact.csv'
+	FROM 'C:\Users\Patrick Sanchez\Downloads\mytruckpoint_dataset\MarketingFact.csv'
 	WITH (
 
 		FIRSTROW = 2,
@@ -147,7 +166,7 @@ BEGIN
 
 	PRINT '>>>>Inserting Data Into: bronze.ProductDim';
 	BULK INSERT bronze.ProductDim
-	FROM 'C:\Users\Patrick Sanchez\Downloads\mytruckpoint\ProductDim.csv'
+	FROM 'C:\Users\Patrick Sanchez\Downloads\mytruckpoint_dataset\ProductDim.csv'
 	WITH (
 
 		FIRSTROW = 2,
@@ -160,6 +179,24 @@ BEGIN
 	PRINT '>>Load Duration: ' + CAST(DATEDIFF(second, @start_time, @end_time) AS NVARCHAR) + ' seconds';
 	PRINT '>> ----------------';
 
+	SET @start_time =GETDATE();
+	PRINT '>>>>Truncating Table: bronze.ReturnReasonDim';
+	TRUNCATE TABLE bronze.ReturnReasonDim;
+
+	PRINT '>>>>Inserting Data Into: bronze.ReturnReasonDim';
+	BULK INSERT bronze.ReturnReasonDim
+	FROM 'C:\Users\Patrick Sanchez\Downloads\mytruckpoint_dataset\ReturnReasonDim.csv'
+	WITH (
+
+		FIRSTROW = 2,
+		FIELDTERMINATOR = ',',
+		ROWTERMINATOR = '0x0a',
+		TABLOCK
+	);
+
+	SET @end_time = GETDATE();
+	PRINT '>>Load Duration: ' + CAST(DATEDIFF(second, @start_time, @end_time) AS NVARCHAR) + ' seconds';
+	PRINT '>> ----------------';
 
 	SET @start_time =GETDATE();
 	PRINT '>>>>Truncating Table: bronze.ReturnsFact';
@@ -167,7 +204,7 @@ BEGIN
 
 	PRINT '>>>>Inserting Data Into: bronze.ReturnsFact';
 	BULK INSERT bronze.ReturnsFact
-	FROM 'C:\Users\Patrick Sanchez\Downloads\mytruckpoint\ReturnsFact.csv'
+	FROM 'C:\Users\Patrick Sanchez\Downloads\mytruckpoint_dataset\ReturnsFact.csv'
 	WITH (
 
 		FIRSTROW = 2,
@@ -186,7 +223,7 @@ BEGIN
 
 	PRINT '>>>>Inserting Data Into: bronze.SalesFact';
 	BULK INSERT bronze.SalesFact
-	FROM 'C:\Users\Patrick Sanchez\Downloads\mytruckpoint\SalesFact.csv'
+	FROM 'C:\Users\Patrick Sanchez\Downloads\mytruckpoint_dataset\SalesFact.csv'
 	WITH (
 
 		FIRSTROW = 2,
@@ -205,7 +242,7 @@ BEGIN
 
 	PRINT '>>>>Inserting Data Into: bronze.ShipmentFact';
 	BULK INSERT bronze.ShipmentFact
-	FROM 'C:\Users\Patrick Sanchez\Downloads\mytruckpoint\ShipmentFact.csv'
+	FROM 'C:\Users\Patrick Sanchez\Downloads\mytruckpoint_dataset\ShipmentFact.csv'
 	WITH (
 
 		FIRSTROW = 2,
@@ -224,7 +261,7 @@ BEGIN
 
 	PRINT '>>>>Inserting Data Into: bronze.SupplierDim';
 	BULK INSERT bronze.SupplierDim
-	FROM 'C:\Users\Patrick Sanchez\Downloads\mytruckpoint\SupplierDim.csv'
+	FROM 'C:\Users\Patrick Sanchez\Downloads\mytruckpoint_dataset\SupplierDim.csv'
 	WITH (
 
 		FIRSTROW = 2,
@@ -243,7 +280,26 @@ BEGIN
 
 	PRINT '>>>>Inserting Data Into: bronze.TimeDim';
 	BULK INSERT bronze.TimeDim
-	FROM 'C:\Users\Patrick Sanchez\Downloads\mytruckpoint\TimeDim.csv'
+	FROM 'C:\Users\Patrick Sanchez\Downloads\mytruckpoint_dataset\TimeDim.csv'
+	WITH (
+
+		FIRSTROW = 2,
+		FIELDTERMINATOR = ',',
+		ROWTERMINATOR = '0x0a',
+		TABLOCK
+	);
+
+	SET @end_time = GETDATE();
+	PRINT '>>Load Duration: ' + CAST(DATEDIFF(second, @start_time, @end_time) AS NVARCHAR) + ' seconds';
+	PRINT '>> ----------------';
+
+	SET @start_time =GETDATE();
+	PRINT '>>>>Truncating Table: bronze.WarehouseDim';
+	TRUNCATE TABLE bronze.WarehouseDim;
+
+	PRINT '>>>>Inserting Data Into: bronze.WarehouseDim';
+	BULK INSERT bronze.WarehouseDim
+	FROM 'C:\Users\Patrick Sanchez\Downloads\mytruckpoint_dataset\WarehouseDim.csv'
 	WITH (
 
 		FIRSTROW = 2,
@@ -271,3 +327,4 @@ BEGIN
 		PRINT '================================================================='
 	END CATCH
 END
+
