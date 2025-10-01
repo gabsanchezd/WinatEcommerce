@@ -1,0 +1,681 @@
+/*
+=========================================================================================================
+Stored Procedure: Load Bronze Layer (Source ->Bronze)
+=========================================================================================================
+Script Purpose:
+	-This script creates tables in the 'silver' schema, dropping existing tables if they already exist.
+	-Run this script to re-define the DDL structure of 'silver' tables.
+  -The script provides the step-by-step process in cleaning and filling the null values for each column.
+  -There is also a short description in each column on what happens after querying the script.
+
+========================================================================================================
+*/  
+
+======================================silver.CarrierDim=================================================
+-- Trim spaces and NULL‑if‑blank on common text columns
+========================================================================================================
+
+INSERT INTO silver.CarrierDim (
+	CarrierID,
+	CarrierName,
+	ServiceLevel)
+SELECT
+  CONVERT(INT, NULLIF(LTRIM(RTRIM(CarrierID)), '')),
+  NULLIF(LTRIM(RTRIM(CarrierName)), ''),
+  NULLIF(LTRIM(RTRIM(ServiceLevel)), '')
+FROM bronze.CarrierDim;
+
+
+=========================================silver.ChannelDim==============================================
+-- Trim spaces and NULL‑if‑blank on common text columns
+========================================================================================================
+
+INSERT INTO silver.ChannelDim (
+	ChannelID,
+	SalesChannel,
+	CampaignID,
+	SourceMedium,
+	AffiliatePartner)
+
+Select
+NULLIF(LTRIM(RTRIM(ChannelID)), ''),
+NULLIF(LTRIM(RTRIM(SalesChannel)), ''),
+NULLIF(LTRIM(RTRIM(CampaignID)), ''),
+NULLIF(LTRIM(RTRIM(SourceMedium)), ''),
+NULLIF(LTRIM(RTRIM(AffiliatePartner)), '')
+FROM bronze.ChannelDim;
+
+
+===========================================silver.CustomerDim===========================================
+-- Trim spaces and NULL‑if‑blank on common text columns
+-- Check and Delete the duplicates and keep the latest row per key
+-- Filling up 'Null' Segment Column with Retail and 'Null' Loyalty Tier Column with None (As advised by 
+our Data Engineer)
+========================================================================================================
+
+INSERT INTO silver.CustomerDim (
+    CustomerID,
+    CustomerName,
+    Gender,
+    Age,
+    Segment,
+    City,
+    State,
+    Country,
+    Zipcode,
+    AcquisitionChannel,
+    LoyaltyTier,
+    CLV)
+
+SELECT
+NULLIF(LTRIM(RTRIM(CustomerID)),'') AS CustomerID,
+NULLIF(LTRIM(RTRIM(CustomerName)),'') AS CustomerName,
+NULLIF(LTRIM(RTRIM(Gender)),'') AS Gender,
+NULLIF(LTRIM(RTRIM(Age)),'') AS Age,
+NULLIF(LTRIM(RTRIM(Segment)),'') AS Age,
+NULLIF(LTRIM(RTRIM(City)),'') AS City,
+NULLIF(LTRIM(RTRIM(State)),'') AS State,
+NULLIF(LTRIM(RTRIM(Country)),'') AS Country,
+NULLIF(LTRIM(RTRIM(Zipcode)),'') AS Zipcode,
+NULLIF(LTRIM(RTRIM(AcquisitionChannel)),'') AS AcquisitionChannel,
+NULLIF(LTRIM(RTRIM(LoyaltyTier)),'') AS LoyaltyTier,
+NULLIF(LTRIM(RTRIM(CLV)),'') AS CLV
+FROM bronze.CustomerDim;
+
+WITH t AS (
+  SELECT *,
+         ROW_NUMBER() OVER (PARTITION BY CustomerID ORDER BY CustomerID) AS rn
+  FROM bronze.CustomerDim
+)
+SELECT *
+FROM t
+WHERE rn > 1;
+
+WITH t AS (
+  SELECT *,
+         ROW_NUMBER() OVER (PARTITION BY CustomerID ORDER BY CustomerID) AS rn
+  FROM bronze.CustomerDim
+)
+DELETE FROM t
+WHERE rn > 1;
+
+UPDATE t SET
+  Segment = COALESCE(Segment,'Retail')
+  LoyaltyTier = COALESCE(LoyaltyTier,'None'),
+FROM bronze.CustomerDim t;
+
+
+=========================================silver.EmployeeDim=============================================
+-- Trim spaces and NULL‑if‑blank on common text columns
+-- Check and Delete the duplicates and keep the latest row per key
+========================================================================================================
+
+INSERT INTO silver.EmployeeDim (
+	EmployeeID,
+	EmployeeName,
+	Role,
+	Department,
+	SalesRegion,
+	CommissionRate)
+
+SELECT
+CONVERT(INT, NULLIF(LTRIM(RTRIM(EmployeeID)), '')) AS EmployeeID,
+NULLIF(LTRIM(RTRIM(EmployeeName)), '')AS EmployeeName,
+NULLIF(LTRIM(RTRIM(Role)), '')AS Role,
+NULLIF(LTRIM(RTRIM(Department)), '')AS Department,
+NULLIF(LTRIM(RTRIM(SalesRegion)), '')AS SalesRegion,
+NULLIF(LTRIM(RTRIM(CommissionRate)), '') AS CommissionRate
+FROM bronze.EmployeeDim;
+
+WITH t AS (
+	SELECT *,
+	ROW_NUMBER () OVER (PARTITION BY EmployeeID ORDER BY EmployeeID) AS rn
+	FROM bronze.EmployeeDim)
+SELECT *
+FROM t
+WHERE rn>1;
+
+WITH t AS (
+	SELECT *,
+	ROW_NUMBER () OVER (PARTITION BY EmployeeID ORDER BY EmployeeID) AS rn
+	FROM bronze.EmployeeDim)
+DELETE FROM t
+WHERE rn>1;
+
+======================================silver.InventoryFact==============================================
+-- Trim spaces and NULL‑if‑blank on common text columns
+-- Check and Delete the duplicates and keep the latest row per key
+========================================================================================================
+
+SELECT
+COALESCE(StockLevel,0) AS StockLevel,
+COALESCE(ReorderPoint,0)AS ReorderPoint,
+COALESCE(DaysOnHand,0) AS DaysOnHand
+FROM bronze.InventoryFact
+
+WITH t AS (
+	SELECT *,
+	ROW_NUMBER () OVER (PARTITION BY InventoryFactID ORDER BY InventoryFactID) as rn
+	FROM bronze.InventoryFact)
+SELECT *
+FROM t
+WHERE rn>1;
+
+WITH t AS (
+	SELECT *,
+	ROW_NUMBER () OVER (PARTITION BY InventoryFactID ORDER InventoryFactID) as rn
+	FROM bronze.InventoryFact)
+DELETE FROM t
+WHERE rn>1;
+
+INSERT INTO silver.InventoryFact(
+	InventoryFactID,
+	DateID,
+	ProductID,
+	WarehouseID,
+	SupplierID,
+	StockLevel,
+	ReorderPoint,
+	DaysOnHand)
+
+SELECT
+NULLIF(LTRIM(RTRIM(InventoryFactID)), '') AS InventoryFactID,
+NULLIF(LTRIM(RTRIM(DateID)), '') AS DateID,
+NULLIF(LTRIM(RTRIM(ProductID)), '') AS ProductID,
+NULLIF(LTRIM(RTRIM(WarehouseID)), '') AS WarehouseID,
+NULLIF(LTRIM(RTRIM(SupplierID)), '') AS SupplierID,
+COALESCE(StockLevel,0) AS StockLevel,
+COALESCE(ReorderPoint,0)AS ReorderPoint,
+COALESCE(DaysOnHand,0) AS DaysOnHand
+FROM bronze.InventoryFact;
+
+WITH t AS (
+	SELECT *,
+	ROW_NUMBER () OVER (PARTITION BY InventoryFactID ORDER BY InventoryFactID) as rn
+	FROM bronze.InventoryFact)
+SELECT *
+FROM t
+WHERE rn>1;
+
+WITH t AS (
+	SELECT *,
+	ROW_NUMBER () OVER (PARTITION BY InventoryFactID ORDER InventoryFactID) as rn
+	FROM bronze.InventoryFact)
+DELETE FROM t
+WHERE rn>1;
+
+
+=========================================silver.LocationDim=============================================
+-- Trim spaces and NULL‑if‑blank on common text columns
+-- Check and Delete the duplicates and keep the latest row per key
+========================================================================================================
+INSERT INTO silver.LocationDim(
+	LocationID,
+	City,
+	State,
+	Country,
+	ZipCode,
+	MarketSegment)
+
+SELECT
+NULLIF(LTRIM(RTRIM(LocationID)), '') AS LocationID,
+NULLIF(LTRIM(RTRIM(City)), '') AS City,
+NULLIF(LTRIM(RTRIM(State)), '') AS State,
+NULLIF(LTRIM(RTRIM(Country)), '') AS ZipCode,
+NULLIF(LTRIM(RTRIM(MarketSegment)), '') AS MarketSegment
+FROM bronze.LocationDim;
+
+WITH t AS (
+	SELECT *,
+	ROW_NUMBER () OVER (PARTITION BY LocationID ORDER BY LocationID) as rn
+	FROM bronze.LocationDim)
+SELECT *
+FROM t
+WHERE rn>1;
+
+WITH t AS (
+	SELECT *,
+	ROW_NUMBER () OVER (PARTITION BY LocationID ORDER BY LocationID) as rn
+	FROM bronze.LocationDim)
+DELETE FROM t
+WHERE rn>1;
+
+
+======================================silver.MarketingFact=============================================
+-- Trim spaces and NULL‑if‑blank on common text columns
+-- Check and Delete the duplicates and keep the latest row per key
+========================================================================================================
+
+INSERT INTO silver.MarketingFact(
+	MarketingFactID,
+	DateID,
+	ChannelID,
+	CampaignID,
+	AdSpend,
+	Impressions,
+	Clicks,
+	Conversions,
+	ROI)
+
+SELECT
+NULLIF(LTRIM(RTRIM(MarketingFactID)), '') AS MarketingFactID,
+NULLIF(LTRIM(RTRIM(DateID)), '') AS DateID,
+NULLIF(LTRIM(RTRIM(ChannelID)), '') AS ChannelID,
+NULLIF(LTRIM(RTRIM(CampaignID)), '') AS CampaignID,
+NULLIF(LTRIM(RTRIM(AdSpend)), '') AS AdSpend,
+NULLIF(LTRIM(RTRIM(Impressions)), '') AS Impressions,
+NULLIF(LTRIM(RTRIM(Clicks)), '') AS Clicks,
+NULLIF(LTRIM(RTRIM(Conversions)), '') AS Conversions,
+NULLIF(LTRIM(RTRIM(ROI)), '') AS ROI
+FROM bronze.MarketingFact;
+
+WITH t AS (
+	SELECT *,
+	ROW_NUMBER () OVER (PARTITION BY MarketingFactID ORDER BY MarketingFactID) as rn
+	FROM bronze.MarketingFact)
+SELECT *
+FROM t
+WHERE rn>1;
+
+WITH t AS (
+	SELECT *,
+	ROW_NUMBER () OVER (PARTITION BY MarketingFactID ORDER BY MarketingFactID) as rn
+	FROM bronze.MarketingFact)
+DELETE FROM t
+WHERE rn>1;
+
+=======================================silver.ProductDim================================================
+-- Trim spaces and NULL‑if‑blank on common text columns
+-- Check and Delete the duplicates and keep the latest row per key
+-- Remove double spaces in ProductName
+-- Fill the NULL values in Warranty Period with 'No Warranty'
+-- Fill in NULL values for Brand with its Corresponding Name in the ProductName column
+========================================================================================================
+INSERT INTO silver.ProductDim(
+	ProductID,
+	SKU,
+	PartNumber,
+	ProductName,
+	Brand,
+	Category,
+	SubCategory,
+	Compatibility,
+	Price,
+	Cost,
+	WarrantyPeriod)
+
+SELECT
+NULLIF(LTRIM(RTRIM(ProductID)), '') AS ProductID,
+NULLIF(LTRIM(RTRIM(SKU)), '') AS SKU,
+NULLIF(LTRIM(RTRIM(PartNumber)), '') AS PartNumber,
+NULLIF(LTRIM(RTRIM(ProductName)), '') AS ProductName,
+NULLIF(LTRIM(RTRIM(Brand)), '') AS Brand,
+NULLIF(LTRIM(RTRIM(Category)), '') AS Category,
+NULLIF(LTRIM(RTRIM(SubCategory)), '') AS SubCategory,
+NULLIF(LTRIM(RTRIM(Compatibility)), '') AS Compatibility,
+NULLIF(LTRIM(RTRIM(Price)), '') AS Price,
+NULLIF(LTRIM(RTRIM(Cost)),'') AS Cost,
+NULLIF(LTRIM(RTRIM(WarrantyPeriod)), '') AS WarrantyPeriod
+FROM bronze.ProductDim;
+
+WITH t AS (
+	SELECT *,
+	ROW_NUMBER () OVER (PARTITION BY ProductID ORDER BY ProductID) as rn
+	FROM bronze.ProductDim)
+SELECT *
+FROM t
+WHERE rn>1;
+
+WITH t AS (
+	SELECT *,
+	ROW_NUMBER () OVER (PARTITION BY ProductID ORDER BY ProductID) as rn
+	FROM bronze.ProductDim)
+DELETE FROM t
+WHERE rn>1;
+
+------------------------------------------------------------------------------------------------------
+SELECT
+REPLACE(ProductName,'  ',' ')
+FROM bronze.ProductDim
+WHERE ProductName LIKE '%  %';
+
+------------------------------------------------------------------------------------------------------
+SELECT
+CASE
+    WHEN WarrantyPeriod IS NULL THEN 'No Warranty'
+    WHEN LOWER(WarrantyPeriod) LIKE '%lifetime%' THEN 'Limited Lifetime'
+    WHEN LOWER(WarrantyPeriod) LIKE '%life time%' THEN 'Limited Lifetime'
+    WHEN LOWER(WarrantyPeriod) LIKE '%5 year%' OR LOWER(WarrantyPeriod) LIKE '%5-year%' OR LOWER(WarrantyPeriod) LIKE '%5 yr%' THEN '5-Year'
+    WHEN LOWER(WarrantyPeriod) LIKE '%3 year%' OR LOWER(WarrantyPeriod) LIKE '%3-year%' OR LOWER(WarrantyPeriod) LIKE '%3 yr%' THEN '3-Year'
+    WHEN LOWER(WarrantyPeriod) LIKE '%1 year%' OR LOWER(WarrantyPeriod) LIKE '%1-year%' OR LOWER(WarrantyPeriod) LIKE '%1 yr%'  THEN '1-Year'
+    WHEN LOWER(WarrantyPeriod) LIKE '%2 year%' OR LOWER(WarrantyPeriod) LIKE '%2-year%' OR LOWER(WarrantyPeriod) LIKE '%2 yr%'  THEN '2-Year'
+    ELSE WarrantyPeriod
+    END AS WarrantyPeriod
+FROM bronze.ProductDim;
+
+
+SELECT
+  ProductName,
+  CASE
+    WHEN Brand IS NOT NULL THEN Brand
+    WHEN Brand IS NULL AND LOWER(ProductName) LIKE '%weathertech%'                 THEN 'WeatherTech'
+    WHEN Brand IS NULL AND LOWER(ProductName) LIKE '%husky%'                       THEN 'Husky Liners'
+    WHEN Brand IS NULL AND LOWER(ProductName) LIKE '%bakflip%'                     THEN 'BAK'
+    WHEN Brand IS NULL AND (
+           LOWER(ProductName) LIKE '% bak %'
+        OR LOWER(ProductName) LIKE 'bak %'
+        OR LOWER(ProductName) LIKE '% bak'
+    )                                                                              THEN 'BAK'
+    WHEN Brand IS NULL AND LOWER(ProductName) LIKE '%truxedo%'                     THEN 'TruXedo'
+    WHEN Brand IS NULL AND LOWER(ProductName) LIKE '%curt%'                        THEN 'CURT'
+    WHEN Brand IS NULL AND LOWER(ProductName) LIKE '%westin%'                      THEN 'Westin'
+    WHEN Brand IS NULL AND (
+           LOWER(ProductName) LIKE '%rough country%'
+        OR LOWER(ProductName) LIKE '%roughcountry%'
+    )                                                                              THEN 'Rough Country'
+    WHEN Brand IS NULL AND (
+                                   LOWER(ProductName) LIKE '%k&n%' 
+                                OR LOWER(ProductName) LIKE '%k n %')               THEN 'K&N'                                                                               
+    WHEN Brand IS NULL AND LOWER(ProductName) LIKE '%flowmaster%'                  THEN 'Flowmaster'
+    WHEN Brand IS NULL AND LOWER(ProductName) LIKE '%magnaflow%'                   THEN 'MagnaFlow'
+    WHEN Brand IS NULL AND LOWER(ProductName) LIKE '%putco%'                       THEN 'Putco'
+    WHEN Brand IS NULL AND LOWER(ProductName) LIKE '%tyger%'                       THEN 'Tyger Auto'
+    WHEN Brand IS NULL AND LOWER(ProductName) LIKE '%extang%'                      THEN 'Extang'
+    WHEN Brand IS NULL AND LOWER(ProductName) LIKE '%retrax%'                      THEN 'Retrax'
+    WHEN Brand IS NULL AND (
+                                   LOWER(ProductName) LIKE '%undercover%'
+                                OR LOWER(ProductName) LIKE '%under cover%')        THEN 'UnderCover'                                                                                    
+    WHEN Brand IS NULL AND (
+           LOWER(ProductName) LIKE '%dee zee%'
+        OR LOWER(ProductName) LIKE '%deezee%' )                                    THEN 'Dee Zee'
+    WHEN Brand IS NULL AND (
+           LOWER(ProductName) LIKE '%n-fab%'
+        OR LOWER(ProductName) LIKE '%nfab%')                                       THEN 'N-FAB'
+    WHEN Brand IS NULL AND LOWER(ProductName) LIKE '%lund%'                        THEN 'Lund'
+    WHEN Brand IS NULL AND LOWER(ProductName) LIKE '%thule%'                       THEN 'Thule'
+    WHEN Brand IS NULL AND LOWER(ProductName) LIKE '%yakima%'                      THEN 'Yakima'
+    WHEN Brand IS NULL AND (
+                               LOWER(ProductName) LIKE '%fox racing%'
+                            OR LOWER(ProductName) LIKE '%fox shocks%'
+                            OR LOWER(ProductName) LIKE '% fox %')                  THEN 'FOX'
+    WHEN Brand IS NULL AND LOWER(ProductName) LIKE '%bilstein%'                    THEN 'Bilstein'
+    WHEN Brand IS NULL AND LOWER(ProductName) LIKE '%rancho%'                      THEN 'Rancho'
+    WHEN Brand IS NULL AND LOWER(ProductName) LIKE '%airaid%'                      THEN 'Airaid'
+  END AS Brand
+FROM bronze.ProductDim;
+
+
+=====================================silver.ReturnReasonDim=============================================
+-- Trim spaces and NULL‑if‑blank on common text columns
+-- Check and Delete the duplicates and keep the latest row per key
+========================================================================================================
+
+INSERT INTO silver.ReturnReasonDim(
+	ReasonID,
+	ReasonName)
+
+SELECT
+LTRIM(RTRIM(ReasonID)) AS ReasonID,
+LTRIM(RTRIM(ReasonName)) AS ReasonName
+FROM bronze.ReturnReasonDim;
+
+
+
+=====================================silver.ReturnsFactDim==============================================
+-- Trim spaces and NULL‑if‑blank on common text columns
+-- Check and Delete the duplicates and keep the latest row per key
+-- Check if there are any negative values in ReturnAmount
+========================================================================================================
+
+INSERT INTO silver.ReturnsFact(
+	ReturnsFactID,
+	DateID,
+	CustomerID,
+	ProductID,
+	ChannelID,
+	ReasonID,
+	ReturnQty,
+	ReturnAmount)
+
+SELECT
+NULLIF(LTRIM(RTRIM(ReturnsFactID)), '') AS ReturnsFactID,
+NULLIF(LTRIM(RTRIM(DateID)), '') AS DateID,
+NULLIF(LTRIM(RTRIM(CustomerID)), '') AS CustomerID,
+NULLIF(LTRIM(RTRIM(ProductID)), '') AS ProductID,
+NULLIF(LTRIM(RTRIM(ChannelID)), '') AS ChannelID,
+NULLIF(LTRIM(RTRIM(ReasonID)), '') AS ReasonID,
+NULLIF(LTRIM(RTRIM(ReturnQty)), '') AS ReturnQty,
+NULLIF(LTRIM(RTRIM(ReturnAmount)), '') AS ReturnAmount
+FROM bronze.ReturnsFact;
+
+WITH t AS (
+	SELECT *,
+	ROW_NUMBER () OVER (PARTITION BY ReturnsFactID ORDER BY CustomerID) as rn
+	FROM bronze.ReturnsFact)
+SELECT *
+FROM t
+WHERE rn>1;
+
+WITH t AS (
+	SELECT *,
+	ROW_NUMBER () OVER (PARTITION BY ReturnsFactID ORDER BY CustomerID) as rn
+	FROM bronze.ReturnsFact)
+DELETE FROM t
+WHERE rn>1;
+
+SELECT *
+FROM bronze.ReturnsFact
+WHERE ReturnAmount <0;
+
+
+======================================silver.SalesFactDim==============================================
+-- Trim spaces and NULL‑if‑blank on common text columns
+-- Check and Delete the duplicates and keep the latest row per key
+-- Check if there are any negative values in SalesAmount and Discount
+========================================================================================================
+
+INSERT INTO silver.SalesFact(
+	SalesFactID,
+	DateID,
+	CustomerID,
+	ProductID,
+	ChannelID,
+	EmployeeID,
+	LocationID,
+	SupplierID,
+	Quantity,
+	SalesAmount,
+	Discount,
+	ProfitMargin)
+
+SELECT
+NULLIF(LTRIM(RTRIM(SalesFactID)), '') AS SalesFactID,
+NULLIF(LTRIM(RTRIM(DateID)), '') AS DateID,
+NULLIF(LTRIM(RTRIM(CustomerID)), '') AS CustomerID,
+NULLIF(LTRIM(RTRIM(ProductID)), '') AS ProductID,
+NULLIF(LTRIM(RTRIM(ChannelID)), '') AS ChannelID,
+NULLIF(LTRIM(RTRIM(EmployeeID)), '') AS EmployeeID,
+NULLIF(LTRIM(RTRIM(LocationID)), '') AS LocationID,
+NULLIF(LTRIM(RTRIM(SupplierID)), '') AS SupplierID,
+NULLIF(LTRIM(RTRIM(Quantity)), '') AS Quantity,
+NULLIF(LTRIM(RTRIM(SalesAmount)), '') AS SalesAmount,
+NULLIF(LTRIM(RTRIM(Discount)), '') AS Discount,
+NULLIF(LTRIM(RTRIM(ProfitMargin)), '') AS ProfitMargin
+FROM bronze.SalesFact;
+
+WITH t AS (
+	SELECT *,
+	ROW_NUMBER () OVER (PARTITION BY SalesFactID ORDER BY CustomerID) as rn
+	FROM bronze.SalesFact)
+SELECT *
+FROM t
+WHERE rn>1;
+
+WITH t AS (
+	SELECT *,
+	ROW_NUMBER () OVER (PARTITION BY SalesFactID ORDER BY CustomerID) as rn
+	FROM bronze.SalesFact)
+DELETE FROM t
+WHERE rn>1;
+
+SELECT *
+FROM bronze.SalesFact
+WHERE SalesAmount <0;
+
+SELECT *
+FROM bronze.SalesFact
+WHERE Discount <0;
+
+
+=======================================silver.SalesFactDim=============================================
+-- Trim spaces and NULL‑if‑blank on common text columns
+-- Check and Delete the duplicates and keep the latest row per key
+-- Check for any negative values in ShippingCost and DeliveryTimeDays
+========================================================================================================
+
+INSERT INTO silver.ShipmentFact(
+	ShipmentFactID,
+	DateID,
+	CustomerID,
+	ProductID,
+	WarehouseID,
+	CarrierID,
+	LocationID,
+	ShippingCost,
+	DeliveryTimeDays)
+
+SELECT
+NULLIF(LTRIM(RTRIM(ShipmentFactID)), '') AS ShipmentFactID,
+NULLIF(LTRIM(RTRIM(DateID)), '') AS DateID,
+NULLIF(LTRIM(RTRIM(CustomerID)), '') AS CustomerID,
+NULLIF(LTRIM(RTRIM(ProductID)), '') AS ProductID,
+NULLIF(LTRIM(RTRIM(WarehouseID)), '') AS WarehouseID,
+NULLIF(LTRIM(RTRIM(CarrierID)), '') AS CarrierID,
+NULLIF(LTRIM(RTRIM(LocationID)), '') AS LocationID,
+NULLIF(LTRIM(RTRIM(ShippingCost)), '') AS ShippingCost,
+NULLIF(LTRIM(RTRIM(DeliveryTimeDays)), '') AS DeliveryTimeDays
+FROM bronze.ShipmentFact;
+
+WITH t AS (
+	SELECT *,
+	ROW_NUMBER () OVER (PARTITION BY ShipmentFactID ORDER BY CustomerID) as rn
+	FROM bronze.ShipmentFact)
+SELECT *
+FROM t
+where rn>1;
+
+WITH t AS (
+	SELECT *,
+	ROW_NUMBER () OVER (PARTITION BY ShipmentFactID ORDER BY CustomerID) as rn
+	FROM bronze.ShipmentFact)
+DELETE FROM t
+WHERE rn>1;
+
+SELECT *
+FROM bronze.ShipmentFact
+WHERE ShippingCost>0;
+
+SELECT *
+FROM bronze.ShipmentFact
+WHERE DeliveryTimeDays>0;
+
+
+=========================================silver.SupplierDim=============================================
+-- Trim spaces and NULL‑if‑blank on common text columns
+-- Check and Delete the duplicates and keep the latest row per key
+-- Check for negative values or values that are far from its true value
+========================================================================================================
+
+INSERT INTO silver.SupplierDim(
+	SupplierID,
+	SupplierName,
+	CountryOfOrigin,
+	LeadTimeDays,
+	ReliabilityScore,
+	PaymentTerms)
+
+SELECT
+NULLIF(LTRIM(RTRIM(SupplierID)), '') AS SupplierID,
+NULLIF(LTRIM(RTRIM(SupplierName)), '') AS SupplierName,
+NULLIF(LTRIM(RTRIM(CountryOfOrigin)), '') AS CountryOfOrigin,
+NULLIF(LTRIM(RTRIM(LeadTimeDays)), '') AS LeadTimeDays,
+NULLIF(LTRIM(RTRIM(ReliabilityScore)), '') AS ReliabilityScore,
+NULLIF(LTRIM(RTRIM(PaymentTerms)), '') AS PaymentTerms
+FROM bronze.SupplierDim;
+
+WITH t AS (
+	SELECT *,
+	ROW_NUMBER () OVER (PARTITION BY SupplierID ORDER BY SupplierName) as rn
+	FROM bronze.SupplierDim)
+SELECT *
+FROM t
+WHERE rn > 1;
+
+WITH t AS (
+	SELECT *,
+	ROW_NUMBER () OVER (PARTITION BY SupplierID ORDER BY SupplierName) as rn
+	FROM bronze.SupplierDim)
+DELETE FROM t
+WHERE rn > 1;
+
+SELECT *
+FROM bronze.SupplierDim
+WHERE ReliabilityScore>1 OR ReliabilityScore<0;
+
+
+=========================================silver.TimeDim=================================================
+-- Check and Delete the duplicates and keep the latest row per key
+-- Check if the format of the Date is on American Standard (Preferred by my Managers)
+========================================================================================================
+
+INSERT INTO silver.TimeDim(
+	DateID,
+	FullDate,
+	Month,
+	Year)
+
+SELECT
+DateID,
+FullDate,
+DATENAME(month, FullDate) AS [Month],
+DATENAME(year, FullDate) AS [Year]
+FROM bronze.TimeDim
+
+SELECT
+COUNT(DateID) AS counter,
+FullDate
+FROM bronze.TimeDim
+GROUP BY FullDate
+HAVING COUNT(DateID)>1;
+
+
+=======================================silver.WarehouseDim==============================================
+-- Check and Delete the duplicates and keep the latest row per key
+-- Trim spaces and NULL‑if‑blank on common text columns
+========================================================================================================
+INSERT INTO silver.WarehouseDim(
+	WarehouseID,
+	WarehouseName,
+	City,
+	State,
+	Country,
+	ZipCode)
+
+
+SELECT
+LTRIM(RTRIM(WarehouseID)),
+LTRIM(RTRIM(WarehouseName)),
+LTRIM(RTRIM(City)),
+LTRIM(RTRIM(State)),
+LTRIM(RTRIM(Country)),
+LTRIM(RTRIM(ZipCode))
+FROM bronze.WarehouseDim;
+
+SELECT
+COUNT(WarehouseID) AS counter,
+WarehouseName
+FROM bronze.WarehouseDim
+GROUP BY WarehouseName
+HAVING COUNT(WarehouseID)>1;
+
+
