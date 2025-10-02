@@ -1,4 +1,17 @@
+/*
+=========================================================================================================
+Stored Procedure: Load Gold Layer (Source ->Silver)
+=========================================================================================================
+Script Purpose:
+	-This script creates view in the 'gold' schema, creating views for metrics being tracked.
+	-The script joins necessary table in order to track the KPIs requested by the stakeholders.
+    -The script provides the step-by-step process in calculating the metrics needed for presentation in 
+      Power BI.
 
+========================================================================================================
+*/  
+
+=======================================gold.sales_star==================================================
 ALTER VIEW gold.sales_star AS
 WITH t AS
 		(SELECT
@@ -28,9 +41,9 @@ SELECT
   SUM(sf.Quantity)    AS Units,
   (SUM(sf.SalesAmount) + SUM(sf.Discount)) AS GMV,
   SUM(sf.ProfitMargin)/SUM(sf.SalesAmount) AS GM_Pct,
-  SUM(sf.Discount)*1.0/(SUM(sf.SalesAmount)+SUM(sf.Discount)) AS DiscountRate,
-  SUM(sf.SalesAmount)*1.0/SUM(sf.Quantity) AS ASP,
-  SUM(sf.SalesAmount)*1.0/COUNT(DISTINCT CONVERT(varchar(50),sf.DateID)+'|'+CONVERT(varchar(50),sf.CustomerID)+'|'+CONVERT(varchar(50),sf.ChannelID)) AS AOV,
+  SUM(sf.Discount)/(SUM(sf.SalesAmount)+SUM(sf.Discount)) AS DiscountRate,
+  SUM(sf.SalesAmount)/SUM(sf.Quantity) AS ASP,
+  SUM(sf.SalesAmount)/COUNT(DISTINCT CONVERT(varchar(50),sf.DateID)+'|'+CONVERT(varchar(50),sf.CustomerID)+'|'+CONVERT(varchar(50),sf.ChannelID)) AS AOV,
   COUNT(DISTINCT sf.CustomerID) AS ActiveCustomers
 FROM silver.SalesFact sf
 JOIN t  tt ON tt.DateID=sf.DateID
@@ -38,7 +51,7 @@ LEFT JOIN ch c ON c.ChannelID=sf.ChannelID
 JOIN p  pr ON pr.ProductID=sf.ProductID
 GROUP BY tt.FullDate, c.SalesChannel, pr.Category;
 
----------------------------------------------------------------------------------------------------------------
+=======================================gold.returns_star================================================
 
 ALTER VIEW gold.returns_star AS
 	WITH t AS
@@ -113,8 +126,7 @@ AND s.Category=r.Category;
 SELECT *
 FROM gold.returns_star
 
--------------------------------------------------------------------------------------------------------------
-
+=====================================gold.shipment_star=================================================
 ALTER VIEW gold.shipment_star AS
 	WITH t AS
 		 (SELECT
@@ -158,8 +170,7 @@ ON s.Category=pr.Category
 GROUP BY s.FullDate, pr.Category, s.Units, s.NetRevenue, s.OrdersProxy;
 
 
----------------------------------------------------------------------------------------------------------------------
-
+=======================================gold.inventory_star==============================================
 ALTER VIEW gold.inventory_star AS
 WITH t AS
  (SELECT
@@ -216,8 +227,7 @@ LEFT JOIN s ON s.FullDate=inv.FullDate
 AND s.Category=inv.Category;
 
 
---------------------------------------------------------------------------------------------------------------
-
+=======================================gold.marketing_star==============================================
 ALTER VIEW gold.marketing_star AS
 	WITH t AS 
 		(SELECT
@@ -264,6 +274,4 @@ LEFT JOIN s  ON s.[Year]=tt.[Year]
 AND s.[Month]=tt.[Month]
 GROUP BY tt.[Year], tt.[Month], c.SalesChannel;
 
-
------------------------------------------------------------------------------------------------------------------
 
