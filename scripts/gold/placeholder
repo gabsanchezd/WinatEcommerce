@@ -1,1 +1,269 @@
 
+ALTER VIEW gold.sales_star AS
+WITH t AS
+		(SELECT
+				DateID,
+				 [Year],
+				 [Month],
+				FullDate
+		FROM silver.TimeDim),
+     ch AS
+		 (SELECT 
+			 ChannelID,
+			 SalesChannel
+		 FROM silver.ChannelDim),
+     p  AS
+		 (SELECT
+			ProductID,
+			Category
+		FROM silver.ProductDim)
+	
+SELECT
+  tt.FullDate AS FullDate,
+ c.SalesChannel AS SalesChannel,
+  pr.Category,
+  SUM(sf.SalesAmount) AS NetRevenue,
+  SUM(sf.Discount)    AS Discount,
+  SUM(sf.ProfitMargin) AS GrossProfit,
+  SUM(sf.Quantity)    AS Units,
+  (SUM(sf.SalesAmount) + SUM(sf.Discount)) AS GMV,
+  SUM(sf.ProfitMargin)/SUM(sf.SalesAmount) AS GM_Pct,
+  SUM(sf.Discount)*1.0/(SUM(sf.SalesAmount)+SUM(sf.Discount)) AS DiscountRate,
+  SUM(sf.SalesAmount)*1.0/SUM(sf.Quantity) AS ASP,
+  SUM(sf.SalesAmount)*1.0/COUNT(DISTINCT CONVERT(varchar(50),sf.DateID)+'|'+CONVERT(varchar(50),sf.CustomerID)+'|'+CONVERT(varchar(50),sf.ChannelID)) AS AOV,
+  COUNT(DISTINCT sf.CustomerID) AS ActiveCustomers
+FROM silver.SalesFact sf
+JOIN t  tt ON tt.DateID=sf.DateID
+LEFT JOIN ch c ON c.ChannelID=sf.ChannelID
+JOIN p  pr ON pr.ProductID=sf.ProductID
+GROUP BY tt.FullDate, c.SalesChannel, pr.Category;
+
+---------------------------------------------------------------------------------------------------------------
+
+ALTER VIEW gold.returns_star AS
+	WITH t AS
+			(SELECT 
+				DateID,
+				 [Year],
+				 [Month],
+				 FullDate
+			 FROM silver.TimeDim),
+     ch AS
+			 (SELECT 
+				 ChannelID,
+				 SalesChannel
+			 FROM silver.ChannelDim),
+     p  AS
+			 (SELECT
+				 ProductID,
+				 Category,
+				SubCategory,
+				Brand,
+			 FROM silver.ProductDim),
+    rr AS
+			(SELECT
+				ReasonID,
+				ReasonName
+			FROM silver.ReturnReasonDim),
+     s  AS
+       (SELECT
+		   tt.FullDate,
+		   c.SalesChannel AS SalesChannel,
+		   pr.Brand,
+			SUM(sf.SalesAmount) AS NetRevenue, 
+			SUM(sf.Quantity) AS Units
+       FROM silver.SalesFact sf
+       JOIN t  tt ON tt.DateID=sf.DateID
+       LEFT JOIN ch c ON c.ChannelID=sf.ChannelID
+       JOIN p  pr ON pr.ProductID=sf.ProductID
+       GROUP BY tt.FullDate, c.SalesChannel, pr.Category),
+     
+     r_rf AS
+     (SELECT
+		 tt.FullDate AS FullDate,
+		 rr.ReasonName,
+		 c.SalesChannel AS SalesChannel,
+		 pr.Category,
+		 pr.SubCategory,
+	         pr.Category,
+		 SUM(rf.ReturnAmount) AS ReturnAmt,
+		 SUM(rf.ReturnQty) AS ReturnQty
+       FROM silver.ReturnsFact rf
+	JOIN rr ON rr.ReasonID=rf.ReasonID
+       JOIN t  tt ON tt.DateID=rf.DateID
+       LEFT JOIN ch c ON c.ChannelID=rf.ChannelID
+       JOIN p  pr ON pr.ProductID=rf.ProductID
+       GROUP BY tt.FullDate, c.SalesChannel, pr.Category)
+       
+SELECT
+  r.FullDate,
+  r.SubCategory,
+  r.Brand,
+  r.SalesChannel AS SalesChannel,
+  r.Category AS Category,
+  r.ReturnAmt AS ReturnAmt,
+  r.ReturnQty AS ReturnQty,
+  r.ReturnAmt/s.NetRevenue AS ReturnRate_Value,
+  r.ReturnQty*1.0/s.Units AS ReturnRate_Qty
+FROM r_rf r
+LEFT JOIN s
+ON s.SalesChannel=r.SalesChannel
+AND s.Category=r.Category;
+
+SELECT *
+FROM gold.returns_star
+
+-------------------------------------------------------------------------------------------------------------
+
+ALTER VIEW gold.shipment_star AS
+	WITH t AS
+		 (SELECT
+			 DateID,
+			 [Year],
+			 [Month],
+			 FullDate
+		 FROM silver.TimeDim),
+         
+     p AS 
+		 (SELECT
+			 ProductID,
+			 Category
+		 FROM silver.ProductDim),
+
+     s_cat AS
+		   (SELECT
+			   tt.FullDate,
+			   pr.Category,
+			   SUM(sf.SalesAmount) AS NetRevenue,
+			   SUM(sf.Quantity) AS Units,
+		   COUNT(DISTINCT CONVERT(varchar(50),sf.DateID)+'|'+CONVERT(varchar(50),sf.CustomerID)) AS OrdersProxy
+		   FROM silver.SalesFact sf
+		   JOIN t  tt ON tt.DateID=sf.DateID
+		   JOIN p  pr ON pr.ProductID=sf.ProductID
+		   GROUP BY tt.FullDate, pr.Category)
+       
+SELECT
+  s.FullDate,
+  pr.Category,
+  SUM(sh.ShippingCost) AS ShipCost,
+  AVG(CAST(sh.DeliveryTimeDays AS float)) AS AvgDeliveryDays,
+  SUM(sh.ShippingCost)/s.Units AS ShipCostPerUnit,
+  SUM(sh.ShippingCost)/s.OrdersProxy AS ShipCostPerOrder,
+  SUM(sh.ShippingCost)/s.NetRevenue AS ShipCostPctSales
+FROM silver.ShipmentFact sh	
+JOIN t  tt ON tt.DateID=sh.DateID
+JOIN p  pr ON pr.ProductID=sh.ProductID
+LEFT JOIN s_cat s 
+ON s.Category=pr.Category
+GROUP BY s.FullDate, pr.Category, s.Units, s.NetRevenue, s.OrdersProxy;
+
+
+---------------------------------------------------------------------------------------------------------------------
+
+ALTER VIEW gold.inventory_star AS
+WITH t AS
+ (SELECT
+	 DateID,
+	 [Year], 
+	 [Month],
+     FullDate
+ FROM silver.TimeDim),
+ 
+     p AS 
+     (SELECT
+     ProductID,
+     Category, 
+     Cost 
+     FROM silver.ProductDim),
+     
+     inv AS 
+       (SELECT
+       tt.FullDate,
+       pr.Category,
+              AVG(i.StockLevel) AS AvgStock,
+              AVG(i.DaysOnHand) AS AvgDOH,
+              AVG(StockLevel) AS StockoutRate,
+              AVG(pr.Cost) AS AvgUnitCost
+       FROM silver.InventoryFact i
+       JOIN t  tt ON tt.DateID=i.DateID
+       JOIN p  pr ON pr.ProductID=i.ProductID
+       GROUP BY tt.FullDate, pr.Category
+       ),
+     
+     s AS 
+       (SELECT
+       tt.FullDate,
+       pr.Category,
+       SUM(sf.SalesAmount) AS NetRevenue,
+	   SUM(sf.ProfitMargin) AS GrossProfit
+       FROM silver.SalesFact sf
+       JOIN t  tt ON tt.DateID=sf.DateID
+       JOIN p  pr ON pr.ProductID=sf.ProductID
+       GROUP BY tt.FullDate, pr.Category
+       )
+
+SELECT
+  inv.FullDate,
+  inv.Category,
+  inv.AvgStock,
+  inv.AvgDOH,
+  inv.StockoutRate,
+  inv.AvgUnitCost,
+  (inv.AvgStock*inv.AvgUnitCost) AS AvgInventoryValue,
+  s.GrossProfit / NULLIF(inv.AvgStock*inv.AvgUnitCost,0) AS GMROI
+FROM inv
+LEFT JOIN s ON s.FullDate=inv.FullDate
+AND s.Category=inv.Category;
+
+
+--------------------------------------------------------------------------------------------------------------
+
+ALTER VIEW gold.marketing_star AS
+	WITH t AS 
+		(SELECT
+			 DateID,
+			 [Year],
+			 [Month],
+			 FullDate
+		 FROM silver.TimeDim),
+         
+     ch AS 
+		 (SELECT
+			 ChannelID,
+			 SalesChannel
+		 FROM silver.ChannelDim),
+     
+     s  AS 
+       (SELECT
+		   tt.[Year],
+		   tt.[Month],
+		   c.SalesChannel AS SalesChannel,
+		   SUM(sf.SalesAmount) AS NetRevenue
+       FROM silver.SalesFact sf
+       JOIN t  tt ON tt.DateID=sf.DateID
+       LEFT JOIN ch c ON c.ChannelID=sf.ChannelID
+       GROUP BY tt.[Year], tt.[Month], c.SalesChannel)
+       
+SELECT
+  tt.[Year], tt.[Month],
+  c.SalesChannel,
+  SUM(m.AdSpend) AS AdSpend,
+  SUM(m.Impressions) AS Impressions,
+  SUM(m.Clicks) AS Clicks,
+  SUM(m.Conversions) AS Conversions,
+  SUM(m.Clicks)*1.0/SUM(m.Impressions) AS CTR,
+  SUM(m.Conversions)*1.0/SUM(m.Clicks) AS CVR,
+  SUM(m.AdSpend)*1.0/SUM(m.Clicks) AS CPC,
+  SUM(m.AdSpend)/SUM(m.Impressions) AS CPM,
+  SUM(m.AdSpend)*1.0/SUM(m.Conversions) AS CPA,
+  SUM(s.NetRevenue)*1.0/SUM(m.AdSpend) AS ROAS
+FROM silver.MarketingFact m
+JOIN t  tt ON tt.DateID=m.DateID
+LEFT JOIN ch c ON c.ChannelID=m.ChannelID
+LEFT JOIN s  ON s.[Year]=tt.[Year] 
+AND s.[Month]=tt.[Month]
+GROUP BY tt.[Year], tt.[Month], c.SalesChannel;
+
+
+-----------------------------------------------------------------------------------------------------------------
+
