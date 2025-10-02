@@ -1,6 +1,6 @@
 /*
 =========================================================================================================
-Stored Procedure: Load Bronze Layer (Source ->Bronze)
+Stored Procedure: Load Silver Layer (Source ->Bronze)
 =========================================================================================================
 Script Purpose:
 	-This script creates tables in the 'silver' schema, dropping existing tables if they already exist.
