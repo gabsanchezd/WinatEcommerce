@@ -65,7 +65,7 @@
 | CPC            | DECIMAL(12,4) | Cost per click = AdSpend / Clicks.                      |
 | CPM            | DECIMAL(12,4) | Cost per 1k impressions = 1000 × AdSpend / Impressions. |
 | CPA            | DECIMAL(12,4) | Cost per acquisition = AdSpend / Conversions.           |
-| ROAS           | DECIMAL(12,4) | Return on ad spend = NetRevenue / AdSpend (from Sales). |
+| ROAS           | DECIMAL(12,4) | Return on ad spend = NetRevenue / AdSpend (from sales). |
 
 
 ### 4. gold.shipment_star
@@ -83,7 +83,7 @@
 | AvgDeliveryDays  | DECIMAL(6,2)  | Average delivery time in days.              |
 | ShipCostPerUnit  | DECIMAL(12,4) | ShipCost / Units (from sales table).        |
 | ShipCostPerOrder | DECIMAL(12,4) | ShipCost / OrdersProxy (from sales table)   |
-| ShipCostPctSales | DECIMAL(6,4)  | ShipCost / NetRevenue (from sales table )   |
+| ShipCostPctSales | DECIMAL(6,4)  | ShipCost / NetRevenue (from sales table)    |
 
 
 ### 5. gold.inventory_star
