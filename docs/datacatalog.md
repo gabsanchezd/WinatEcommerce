@@ -2,7 +2,7 @@
 
 
 ## Overview
- The 'gold' layer is the business-level data representation, structured to support analytical and reporting use cases. It consists of **dimension** tables and **fact** tables for specific business metrics.
+ The 'gold' layer is the business-level data representation, structured to support analytical and reporting use cases. It consists of **"dimension"** tables and **"fact"** tables for specific business metrics.
 
 ### 1. gold.sales_star
 - Purpose: Rollup of commerce performance by channel and category.
