@@ -33,7 +33,7 @@
 ---
 
 ## Project Background
-MyTruckPoint is a Canada-based truck/SUV accessories retailer with a hybrid model: a national e-commerce site (mytruckpoint.ca) and a physical store offering assisted sales and installation. The catalog is highly fitment-sensitive (tonneau covers, running boards, racks, towing, liners), so accurate vehicle compatibility and post-purchase experience (returns, shipping, install) directly affect margin and customer satisfaction. This project builds a unified analytics layer and role-based dashboards to translate raw sales, returns, marketing, shipment, and inventory data into clear actions—tightening pricing/mix, reducing avoidable returns, reallocating media to high-ROAS channels, and improving delivery and inventory health for profitable growth.
+MyTruckPoint is a Canada-based truck and SUV accessories retailer with a hybrid model: a national e-commerce site (mytruckpoint.ca) and a physical store offering assisted sales and professional installation. Profitability is constrained by high return rates (driven by fitment/installation issues), margin erosion from heavy discounting and a shift toward lower-take marketplace channels, inefficient marketing spend (uneven ROAS/CVR), and delivery costs and timelines that depress conversion. As a result, net revenue is not scaling with ad spend, and gross margin remains below target despite steady traffic. This project delivers a unified analytics layer and role-based dashboards that turn raw sales, returns, marketing, shipment, and inventory data into clear actions—tightening pricing and mix, reducing avoidable returns, reallocating media to high-ROAS channels, and improving delivery and inventory health to drive profitable growth.
 
 ---
 
