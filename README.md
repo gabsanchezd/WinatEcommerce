@@ -14,7 +14,7 @@
 - **Dimensional Modeling (Gold)**: star schemas for Sales, Returns, Shipment, Inventory, Marketing
 - **KPI SQL Views**: exec & cross-star views (GMV, Net Revenue, Gross Profit/GM%, AOV, Units, Return Rates, ROAS/CPA/CVR, Shipping KPIs, GMROI/Turnover).
 - **Power BI**: role-based pages (Executive, Sales & Pricing, Returns & Fitment, Marketing Efficiency, Channel & Store, Delivery & Inventory Health) with DAX measures & slicers.
-- **Governance**: recommendations(30/60/90) days, forecasting, data dictionary, assumptions/caveats, drift-normalized views for mix-adjusted trend reading.
+- **Governance**: recommendations(30/60/90 days), forecasting, data dictionary, assumptions/caveats, drift-normalized views for mix-adjusted trend reading.
 
 
 ## Table of Contents
@@ -64,7 +64,6 @@ MyTruckPoint is a Canada-based auto accessories retailer (mytruckpoint.ca) with 
 - The middle scatter (GM% vs Discount Rate, colored by channel) clusters between 12–16% discount and 18–24% GM%, with a mild negative slope: higher discount months tend to sit on the lower end of GM%. Points colored In-Store generally sit a bit higher on GM% than Marketplace/MobileApp, hinting that guided or non-fee channels realize price better.
 - The channel mix by month shifts visibly—months with larger Marketplace/MobileApp bands align with GM% softness, whereas stronger Web/In-Store share coincides with firmer margins.
 
-Net: shift from blanket promos to bundle-led offers, apply promo caps by brand tier, and nudge premium SKUs toward web/in-store where price realization is stronger.
 
 ### Returns & Fitment
 ![Returns&Fitment](https://github.com/gabsanchezd/WinatEcommerce/blob/main/visualizations/Returns%26Fitment.png?raw=true "Returns&Fitment title")
